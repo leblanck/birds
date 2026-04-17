@@ -1,0 +1,41 @@
+Submission ID,Common Name,Scientific Name,Taxonomic Order,Count,State/Province,County,Location ID,Location,Latitude,Longitude,Date,Time,Protocol,Duration (Min),All Obs Reported,Distance Traveled (km),Area Covered (ha),Number of Observers,Breeding Code,Observation Details,Checklist Comments,ML Catalog Numbers
+S319507306,Mallard,Anas platyrhynchos,545,7,US-ME,Cumberland,L9076474,Forest City Cemetery,43.6346567,-70.2774657,2026-04-10,06:55 AM,eBird - Traveling Count,34,1,1.101,,1
+S318223222,Wild Turkey,Meleagris gallopavo,1274,8,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-07,06:48 AM,eBird - Casual Observation,,0,,,1
+S318746783,Wild Turkey,Meleagris gallopavo,1274,7,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-08,11:08 AM,eBird - Stationary Count,1,1,,,1
+S319196479,Wild Turkey,Meleagris gallopavo,1274,7,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-09,11:19 AM,eBird - Stationary Count,1,1,,,1
+S320740429,Wild Turkey,Meleagris gallopavo,1274,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-12,12:26 PM,eBird - Stationary Count,13,1,,,1
+S320924964,Wild Turkey,Meleagris gallopavo,1274,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-12,07:05 PM,eBird - Stationary Count,1,1,,,1
+S322181326,Wild Turkey,Meleagris gallopavo,1274,3,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-15,04:40 PM,eBird - Stationary Count,1,1,,,1
+S321074228,Downy Woodpecker,Dryobates pubescens,11400,2,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-13,07:35 AM,eBird - Stationary Count,1,1,,,1
+S322631067,Downy Woodpecker,Dryobates pubescens,11400,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-16,04:53 PM,eBird - Stationary Count,2,1,,,1
+S320924964,Eastern Phoebe,Sayornis phoebe,17007,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-12,07:05 PM,eBird - Stationary Count,1,1,,,1
+S319507306,American Crow,Corvus brachyrhynchos,21557,2,US-ME,Cumberland,L9076474,Forest City Cemetery,43.6346567,-70.2774657,2026-04-10,06:55 AM,eBird - Traveling Count,34,1,1.101,,1
+S318223222,American Crow,Corvus brachyrhynchos,21557,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-07,06:48 AM,eBird - Casual Observation,,0,,,1
+S319233187,American Crow,Corvus brachyrhynchos,21557,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-09,12:41 PM,eBird - Stationary Count,1,1,,,1
+S319233187,Black-capped Chickadee,Poecile atricapillus,22065,2,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-09,12:41 PM,eBird - Stationary Count,1,1,,,1
+S320800124,Black-capped Chickadee,Poecile atricapillus,22065,2,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-12,02:19 PM,eBird - Stationary Count,1,1,,,1
+S321074228,Black-capped Chickadee,Poecile atricapillus,22065,5,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-13,07:35 AM,eBird - Stationary Count,1,1,,,1
+S321625938,Black-capped Chickadee,Poecile atricapillus,22065,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-14,10:42 AM,eBird - Traveling Count,24,1,.12,,1
+S321644255,Black-capped Chickadee,Poecile atricapillus,22065,3,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-14,11:35 AM,eBird - Traveling Count,19,1,.098,,1
+S322181326,Black-capped Chickadee,Poecile atricapillus,22065,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-15,04:40 PM,eBird - Stationary Count,1,1,,,1
+S322631067,Black-capped Chickadee,Poecile atricapillus,22065,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-16,04:53 PM,eBird - Stationary Count,2,1,,,1
+S320740429,Tufted Titmouse,Baeolophus bicolor,22160,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-12,12:26 PM,eBird - Stationary Count,13,1,,,1
+S321644255,Tufted Titmouse,Baeolophus bicolor,22160,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-14,11:35 AM,eBird - Traveling Count,19,1,.098,,1
+S319507306,American Robin,Turdus migratorius,28633,1,US-ME,Cumberland,L9076474,Forest City Cemetery,43.6346567,-70.2774657,2026-04-10,06:55 AM,eBird - Traveling Count,34,1,1.101,,1
+S320740429,American Robin,Turdus migratorius,28633,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-12,12:26 PM,eBird - Stationary Count,13,1,,,1
+S320800124,American Robin,Turdus migratorius,28633,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-12,02:19 PM,eBird - Stationary Count,1,1,,,1
+S320924964,American Robin,Turdus migratorius,28633,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-12,07:05 PM,eBird - Stationary Count,1,1,,,1
+S321074228,American Robin,Turdus migratorius,28633,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-13,07:35 AM,eBird - Stationary Count,1,1,,,1
+S321644255,American Robin,Turdus migratorius,28633,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-14,11:35 AM,eBird - Traveling Count,19,1,.098,,1,,,,654986112
+S321649804,House Finch,Haemorhous mexicanus,32310,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-14,12:06 PM,eBird - Stationary Count,1,1,,,1,,,,654985970
+S321649804,American Goldfinch,Spinus tristis,32617,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-14,12:06 PM,eBird - Stationary Count,1,1,,,1
+S320924964,Chipping Sparrow,Spizella passerina,32990,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-12,07:05 PM,eBird - Stationary Count,1,1,,,1
+S321625938,Dark-eyed Junco,Junco hyemalis,33124,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-14,10:42 AM,eBird - Traveling Count,24,1,.12,,1
+S321644255,Dark-eyed Junco,Junco hyemalis,33124,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-14,11:35 AM,eBird - Traveling Count,19,1,.098,,1
+S322631067,Dark-eyed Junco,Junco hyemalis,33124,2,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-16,04:53 PM,eBird - Stationary Count,2,1,,,1
+S318746783,White-throated Sparrow,Zonotrichia albicollis,33201,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-08,11:08 AM,eBird - Stationary Count,1,1,,,1,,,,654506181
+S321644255,Song Sparrow,Melospiza melodia,33277,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-14,11:35 AM,eBird - Traveling Count,19,1,.098,,1
+S322181326,Pine Warbler,Setophaga pinus,34153,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-15,04:40 PM,eBird - Stationary Count,1,1,,,1
+S319196479,Northern Cardinal,Cardinalis cardinalis,34515,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-09,11:19 AM,eBird - Stationary Count,1,1,,,1
+S320800124,Northern Cardinal,Cardinalis cardinalis,34515,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-12,02:19 PM,eBird - Stationary Count,1,1,,,1
+S321644255,Northern Cardinal,Cardinalis cardinalis,34515,2,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-14,11:35 AM,eBird - Traveling Count,19,1,.098,,1,,,,654986160 654986161
