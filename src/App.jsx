@@ -1,7 +1,9 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 
 const CELL_SIZE = 13;
 const CELL_GAP = 3;
+
+// ── Date / grid helpers ────────────────────────────────────────────────────────
 
 function getDatesLastYear() {
   const dates = [];
@@ -53,16 +55,107 @@ function getColor(count, max) {
   if (!count || count === 0) return "#1a1f2e";
   const intensity = Math.min(count / Math.max(max, 1), 1);
   if (intensity < 0.25) return "#0d3b2e";
-  if (intensity < 0.5) return "#1a6b4a";
+  if (intensity < 0.5)  return "#1a6b4a";
   if (intensity < 0.75) return "#2d9e6b";
   return "#45d08c";
 }
 
 function formatDate(dateStr) {
   return new Date(dateStr + "T12:00:00").toLocaleDateString("en-US", {
-    weekday: "long", month: "long", day: "numeric", year: "numeric"
+    weekday: "long", month: "long", day: "numeric", year: "numeric",
   });
 }
+
+// ── CSV parser ─────────────────────────────────────────────────────────────────
+
+function parseEbirdCSV(text) {
+  const lines = text.trim().split("\n");
+  const headerIdx = lines.findIndex(l => l.includes("Submission ID") || l.includes("Date"));
+  if (headerIdx === -1) throw new Error("Couldn't find a header row — is this an eBird MyData CSV?");
+
+  const headers = lines[headerIdx].split(",").map(h => h.replace(/"/g, "").trim());
+  const col = (name) => headers.findIndex(h => h.toLowerCase().includes(name.toLowerCase()));
+
+  const subIdCol    = col("Submission ID");
+  const dateCol     = col("Date");
+  const locationCol = col("Location");
+  const timeCol     = col("Time");
+  const durationCol = col("Duration");
+  const speciesCol  = col("Common Name");
+  const countCol    = col("Count");
+  const allObsCol   = col("All Obs");
+
+  if (dateCol === -1 || subIdCol === -1) {
+    throw new Error("CSV is missing expected columns. Make sure you exported from ebird.org/downloadMyData.");
+  }
+
+  const byDate = {};
+  const checklistMeta = {};
+
+  for (let i = headerIdx + 1; i < lines.length; i++) {
+    const line = lines[i];
+    if (!line.trim()) continue;
+
+    // Parse CSV line respecting quoted fields
+    const cols = [];
+    let cur = "", inQuote = false;
+    for (const ch of line) {
+      if (ch === '"') { inQuote = !inQuote; }
+      else if (ch === "," && !inQuote) { cols.push(cur.trim()); cur = ""; }
+      else { cur += ch; }
+    }
+    cols.push(cur.trim());
+
+    const get = (idx) => cols[idx]?.replace(/"/g, "").trim() ?? "";
+
+    const dateStr = get(dateCol);
+    const subId   = get(subIdCol);
+    if (!dateStr || !subId) continue;
+
+    if (!checklistMeta[subId]) {
+      checklistMeta[subId] = {
+        subId,
+        date: dateStr,
+        locName: get(locationCol) || "Unknown location",
+        time: get(timeCol),
+        duration: get(durationCol),
+        allObsReported: get(allObsCol) === "1",
+        obs: [],
+      };
+    }
+
+    const speciesName = get(speciesCol);
+    const count = get(countCol);
+    if (speciesName) {
+      checklistMeta[subId].obs.push({ comName: speciesName, howManyStr: count });
+    }
+
+    if (!byDate[dateStr]) byDate[dateStr] = new Set();
+    byDate[dateStr].add(subId);
+  }
+
+  const data = {};
+  for (const [date, subIds] of Object.entries(byDate)) {
+    const checklists = [...subIds].map(id => checklistMeta[id]);
+    data[date] = {
+      checklists: checklists.length,
+      species: Math.max(...checklists.map(cl => cl.obs.length)),
+      checklistDetails: checklists,
+    };
+  }
+
+  return data;
+}
+
+function applyDateFilter(parsed) {
+  const oneYearAgo = new Date();
+  oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
+  return Object.fromEntries(
+    Object.entries(parsed).filter(([d]) => new Date(d) >= oneYearAgo)
+  );
+}
+
+// ── Spinner ────────────────────────────────────────────────────────────────────
 
 function Spinner() {
   return (
@@ -77,43 +170,11 @@ function Spinner() {
   );
 }
 
-function DayPanel({ date, dayData, apiKey, allChecklists, onClose, useProxy }) {
-  const [checklists, setChecklists] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+// ── Day detail panel ───────────────────────────────────────────────────────────
 
-  useEffect(() => {
-    if (!date || !dayData) { setLoading(false); return; }
-    async function load() {
-      setLoading(true);
-      setError("");
-      try {
-        const dayItems = (allChecklists || []).filter(c => c.obsDt?.startsWith(date));
-        const detailed = await Promise.all(
-          dayItems.slice(0, 6).map(async (c) => {
-            try {
-              const res = useProxy
-                ? await fetch(`/api/ebird-checklist?checklistId=${c.subId}`)
-                : await fetch(
-                    `https://api.ebird.org/v2/product/checklist/view/${c.subId}`,
-                    { headers: { "X-eBirdApiToken": apiKey } }
-                  );
-              if (!res.ok) return { ...c, obs: [], locName: c.loc?.name || "Unknown location" };
-              const json = await res.json();
-              return { ...c, obs: json.obs || [], locName: json.loc?.name || c.loc?.name || "Unknown location", durationHrs: json.durationHrs };
-            } catch {
-              return { ...c, obs: [], locName: c.loc?.name || "Unknown location" };
-            }
-          })
-        );
-        setChecklists(detailed);
-      } catch (e) {
-        setError(e.message);
-      }
-      setLoading(false);
-    }
-    load();
-  }, [date, apiKey, allChecklists, dayData]);
+function DayPanel({ date, dayData, onClose }) {
+  if (!date) return null;
+  const checklists = dayData?.checklistDetails || [];
 
   return (
     <>
@@ -131,7 +192,6 @@ function DayPanel({ date, dayData, apiKey, allChecklists, onClose, useProxy }) {
         animation: "slideIn 0.22s cubic-bezier(0.16,1,0.3,1)",
         overflowY: "auto",
       }}>
-        {/* Header */}
         <div style={{
           padding: "24px 24px 18px",
           borderBottom: "1px solid #21262d",
@@ -154,54 +214,26 @@ function DayPanel({ date, dayData, apiKey, allChecklists, onClose, useProxy }) {
               display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0,
             }}>✕</button>
           </div>
-
           {dayData && (
             <div style={{ display: "flex", gap: 8, marginTop: 14, flexWrap: "wrap" }}>
-              <div style={{
-                background: "#0d3b2e", border: "1px solid #2d9e6b44",
-                borderRadius: 20, padding: "4px 12px", fontSize: 12, color: "#45d08c",
-              }}>
+              <div style={{ background: "#0d3b2e", border: "1px solid #2d9e6b44", borderRadius: 20, padding: "4px 12px", fontSize: 12, color: "#45d08c" }}>
                 🗒 {dayData.checklists} checklist{dayData.checklists !== 1 ? "s" : ""}
               </div>
-              <div style={{
-                background: "#0d3b2e", border: "1px solid #2d9e6b44",
-                borderRadius: 20, padding: "4px 12px", fontSize: 12, color: "#45d08c",
-              }}>
+              <div style={{ background: "#0d3b2e", border: "1px solid #2d9e6b44", borderRadius: 20, padding: "4px 12px", fontSize: 12, color: "#45d08c" }}>
                 🐦 {dayData.species} species
               </div>
             </div>
           )}
         </div>
 
-        {/* Body */}
         <div style={{ padding: "18px 24px", flex: 1 }}>
           {!dayData && (
             <div style={{ color: "#7d8590", fontSize: 13, textAlign: "center", paddingTop: 48 }}>
               No birding activity recorded on this day.
             </div>
           )}
-
-          {loading && dayData && (
-            <div style={{ color: "#7d8590", fontSize: 13, display: "flex", alignItems: "center", gap: 10 }}>
-              <Spinner /> Loading checklist details...
-            </div>
-          )}
-
-          {error && (
-            <div style={{ color: "#f47c7c", fontSize: 13, background: "#2d1b1b", border: "1px solid #6e3030", borderRadius: 8, padding: "10px 14px" }}>
-              ⚠️ {error}
-            </div>
-          )}
-
-          {!loading && checklists && checklists.map((cl, i) => (
-            <div key={cl.subId || i} style={{
-              marginBottom: 16,
-              background: "#161b22",
-              border: "1px solid #21262d",
-              borderRadius: 10,
-              overflow: "hidden",
-            }}>
-              {/* Checklist header */}
+          {checklists.map((cl, i) => (
+            <div key={cl.subId || i} style={{ marginBottom: 16, background: "#161b22", border: "1px solid #21262d", borderRadius: 10, overflow: "hidden" }}>
               <div style={{ padding: "12px 14px", borderBottom: cl.obs?.length ? "1px solid #21262d" : "none" }}>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 8 }}>
                   <div style={{ minWidth: 0 }}>
@@ -209,28 +241,17 @@ function DayPanel({ date, dayData, apiKey, allChecklists, onClose, useProxy }) {
                       📍 {cl.locName}
                     </div>
                     <div style={{ fontSize: 11, color: "#7d8590" }}>
-                      {[
-                        cl.obsDt?.split(" ")[1],
-                        cl.durationHrs ? `${Math.round(cl.durationHrs * 60)} min` : null,
-                        `${cl.obs?.length || cl.numSpecies || 0} species`,
-                        cl.allObsReported ? "Complete" : null,
-                      ].filter(Boolean).join(" · ")}
+                      {[cl.time, cl.duration ? `${cl.duration} min` : null, `${cl.obs?.length || 0} species`, cl.allObsReported ? "Complete" : null].filter(Boolean).join(" · ")}
                     </div>
                   </div>
                   {cl.subId && (
                     <a href={`https://ebird.org/checklist/${cl.subId}`} target="_blank" rel="noreferrer"
-                      style={{
-                        fontSize: 10, color: "#45d08c",
-                        border: "1px solid #2d9e6b44", borderRadius: 4,
-                        padding: "3px 8px", whiteSpace: "nowrap", flexShrink: 0,
-                      }}>
+                      style={{ fontSize: 10, color: "#45d08c", border: "1px solid #2d9e6b44", borderRadius: 4, padding: "3px 8px", whiteSpace: "nowrap", flexShrink: 0 }}>
                       View ↗
                     </a>
                   )}
                 </div>
               </div>
-
-              {/* Species list */}
               {cl.obs && cl.obs.length > 0 && (
                 <div style={{ maxHeight: 240, overflowY: "auto" }}>
                   {cl.obs.map((obs, j) => (
@@ -240,18 +261,12 @@ function DayPanel({ date, dayData, apiKey, allChecklists, onClose, useProxy }) {
                       borderBottom: j < cl.obs.length - 1 ? "1px solid #21262d" : "none",
                       fontSize: 12,
                     }}>
-                      <span style={{ color: "#c9d1d9" }}>{obs.comName || obs.speciesCode}</span>
+                      <span style={{ color: "#c9d1d9" }}>{obs.comName}</span>
                       <span style={{ color: "#45d08c", fontVariantNumeric: "tabular-nums", marginLeft: 12, flexShrink: 0 }}>
                         {obs.howManyStr === "X" ? "✓" : obs.howManyStr || "—"}
                       </span>
                     </div>
                   ))}
-                </div>
-              )}
-
-              {cl.obs && cl.obs.length === 0 && (
-                <div style={{ padding: "10px 14px", fontSize: 12, color: "#7d8590" }}>
-                  No species detail available.
                 </div>
               )}
             </div>
@@ -262,86 +277,91 @@ function DayPanel({ date, dayData, apiKey, allChecklists, onClose, useProxy }) {
   );
 }
 
-const ENV_API_KEY = typeof import.meta !== "undefined" ? (import.meta.env?.VITE_EBIRD_API_KEY || "") : "";
-const ENV_USERNAME = typeof import.meta !== "undefined" ? (import.meta.env?.VITE_EBIRD_USERNAME || "") : "";
-const HAS_ENV = !!(ENV_API_KEY && ENV_USERNAME);
+// ── Main app ───────────────────────────────────────────────────────────────────
+
+const DAY_LABELS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+// Set to true if you want to allow visitors to upload their own CSV as a fallback
+const ALLOW_VISITOR_UPLOAD = true;
 
 export default function App() {
-  const [apiKey, setApiKey] = useState(ENV_API_KEY);
-  const [inputKey, setInputKey] = useState("");
-  const [subId, setSubId] = useState(ENV_USERNAME);
-  const [data, setData] = useState({});
-  const [allChecklists, setAllChecklists] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-  const [tooltip, setTooltip] = useState(null);
-  const [stats, setStats] = useState(null);
+  const [data, setData]                 = useState({});
+  const [stats, setStats]               = useState(null);
+  const [error, setError]               = useState("");
+  const [loading, setLoading]           = useState(true);
+  const [csvSource, setCsvSource]       = useState(null); // "bundled" | "uploaded"
+  const [tooltip, setTooltip]           = useState(null);
   const [selectedDate, setSelectedDate] = useState(null);
-  // guestMode: true when a visitor wants to enter their own credentials
-  const [guestMode, setGuestMode] = useState(false);
+  const [dragging, setDragging]         = useState(false);
+  const fileInputRef                    = useRef(null);
 
-  const dates = getDatesLastYear();
-  const weeks = groupByWeek(dates);
-  const monthLabels = getMonthLabels(weeks);
+  const dates         = getDatesLastYear();
+  const weeks         = groupByWeek(dates);
+  const monthLabels   = getMonthLabels(weeks);
   const maxChecklists = Math.max(...Object.values(data).map(d => d.checklists || 0), 1);
+  const hasData       = Object.keys(data).length > 0;
 
-  const fetchData = useCallback(async (key) => {
+  // ── Try to load bundled CSV from public/ on mount ──────────────────────────
+  useEffect(() => {
+    fetch("/ebird-data.csv")
+      .then(res => {
+        if (!res.ok) throw new Error("no bundled csv");
+        return res.text();
+      })
+      .then(text => {
+        const parsed = parseEbirdCSV(text);
+        const filtered = applyDateFilter(parsed);
+        setData(filtered);
+        setStats({
+          totalChecklists: Object.values(filtered).reduce((s, d) => s + d.checklists, 0),
+          totalDays: Object.keys(filtered).length,
+        });
+        setCsvSource("bundled");
+        setLoading(false);
+      })
+      .catch(() => {
+        // No bundled CSV — show upload UI instead
+        setLoading(false);
+      });
+  }, []);
+
+  // ── Process an uploaded file ───────────────────────────────────────────────
+  const processFile = useCallback((file) => {
+    if (!file) return;
+    if (!file.name.endsWith(".csv")) {
+      setError("Please upload a .csv file exported from ebird.org/downloadMyData");
+      return;
+    }
     setLoading(true);
     setError("");
-    try {
-      if (!subId) { setLoading(false); setError("NEED_SUBID"); return; }
-      const result = {};
-      const raw = [];
-      let offset = 0, done = false;
-      const oneYearAgo = new Date();
-      oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
-
-      // Use server-side proxy when env vars are set (keeps API key off the browser).
-      // Fall back to direct eBird call for guest mode with a user-supplied key.
-      const useProxy = HAS_ENV && !guestMode;
-
-      while (!done) {
-        let res;
-        if (useProxy) {
-          res = await fetch(`/api/ebird-lists?subId=${subId}&offset=${offset}`);
-        } else {
-          res = await fetch(
-            `https://ebird.org/api/v2/product/lists/${subId}?maxResults=200&offset=${offset}`,
-            { headers: { "X-eBirdApiToken": key } }
-          );
-        }
-        if (!res.ok) throw new Error(`API error: ${res.status} — check your API key and eBird username.`);
-        const json = await res.json();
-        if (!Array.isArray(json) || json.length === 0) break;
-
-        for (const cl of json) {
-          const dateStr = cl.obsDt?.split(" ")[0];
-          if (!dateStr) continue;
-          if (new Date(dateStr) < oneYearAgo) { done = true; break; }
-          raw.push(cl);
-          if (!result[dateStr]) result[dateStr] = { checklists: 0, species: 0 };
-          result[dateStr].checklists += 1;
-          result[dateStr].species = Math.max(result[dateStr].species, cl.numSpecies || 0);
-        }
-        if (json.length < 200) done = true;
-        else offset += 200;
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      try {
+        const parsed = parseEbirdCSV(e.target.result);
+        const filtered = applyDateFilter(parsed);
+        setData(filtered);
+        setStats({
+          totalChecklists: Object.values(filtered).reduce((s, d) => s + d.checklists, 0),
+          totalDays: Object.keys(filtered).length,
+        });
+        setCsvSource("uploaded");
+        setSelectedDate(null);
+      } catch (err) {
+        setError(err.message);
       }
+      setLoading(false);
+    };
+    reader.onerror = () => { setError("Failed to read file."); setLoading(false); };
+    reader.readAsText(file);
+  }, []);
 
-      setData(result);
-      setAllChecklists(raw);
-      setStats({
-        totalChecklists: Object.values(result).reduce((s, d) => s + d.checklists, 0),
-        totalDays: Object.keys(result).length,
-      });
-    } catch (e) {
-      setError(e.message);
-    }
-    setLoading(false);
-  }, [subId, guestMode]);
+  const handleDrop = useCallback((e) => {
+    e.preventDefault();
+    setDragging(false);
+    processFile(e.dataTransfer.files[0]);
+  }, [processFile]);
 
-  useEffect(() => { if (apiKey && subId) fetchData(apiKey); }, [apiKey, subId, fetchData]);
-
-  const DAY_LABELS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  // ── Render ─────────────────────────────────────────────────────────────────
 
   return (
     <div style={{
@@ -357,9 +377,9 @@ export default function App() {
         @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Playfair+Display:wght@700&display=swap');
         * { box-sizing: border-box; }
         ::selection { background: #45d08c33; }
-        @keyframes fadeIn { from { opacity:0 } to { opacity:1 } }
+        @keyframes fadeIn  { from { opacity:0 } to { opacity:1 } }
         @keyframes slideIn { from { transform:translateX(100%) } to { transform:translateX(0) } }
-        @keyframes spin { to { transform:rotate(360deg) } }
+        @keyframes spin    { to { transform:rotate(360deg) } }
         .cell {
           width: ${CELL_SIZE}px; height: ${CELL_SIZE}px;
           border-radius: 2px;
@@ -367,18 +387,16 @@ export default function App() {
           flex-shrink: 0;
         }
         .cell-active { cursor: pointer; }
-        .cell-active:hover {
-          transform: scale(1.4); filter: brightness(1.3);
-          z-index: 10; position: relative;
-        }
+        .cell-active:hover { transform: scale(1.4); filter: brightness(1.3); z-index: 10; position: relative; }
         .cell-selected { outline: 2px solid #45d08c; outline-offset: 1px; }
-        input {
-          background: #161b22; border: 1px solid #30363d; color: #e6edf3;
-          padding: 10px 16px; border-radius: 6px;
-          font-family: 'DM Mono', monospace; font-size: 13px;
-          outline: none; width: 100%; transition: border-color 0.2s;
+        .drop-zone {
+          border: 1.5px dashed #30363d;
+          border-radius: 12px; padding: 40px 32px;
+          text-align: center; cursor: pointer;
+          transition: border-color 0.2s, background 0.2s;
+          width: 100%; max-width: 480px;
         }
-        input:focus { border-color: #45d08c; }
+        .drop-zone:hover, .drop-zone.dragging { border-color: #45d08c; background: #45d08c08; }
         button {
           background: #45d08c; color: #0d1117; border: none;
           padding: 10px 24px; border-radius: 6px;
@@ -387,7 +405,6 @@ export default function App() {
         }
         button:hover { background: #5de0a0; transform: translateY(-1px); }
         button:active { transform: translateY(0); }
-        button:disabled { background: #2d9e6b; opacity: 0.5; cursor: not-allowed; transform: none; }
         a { color: #45d08c; text-decoration: none; }
         a:hover { text-decoration: underline; }
         .tooltip {
@@ -412,89 +429,70 @@ export default function App() {
           WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent",
           letterSpacing: "-0.5px",
         }}>Birding Activity</h1>
-        <p style={{ color: "#7d8590", fontSize: 13, margin: 0 }}>Personal checklist heatmap · Last 12 months</p>
+        <p style={{ color: "#7d8590", fontSize: 13, margin: 0 }}>
+          Personal checklist heatmap · Last 12 months
+        </p>
       </div>
 
-      {/* Step 1: API Key */}
-      {(!apiKey || guestMode) && guestMode && (
-        <div style={{ background: "#161b22", border: "1px solid #30363d", borderRadius: 12, padding: 28, width: "100%", maxWidth: 480, marginBottom: 32 }}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
-            <p style={{ fontSize: 13, color: "#7d8590", margin: 0 }}>
-              Enter your eBird API key.{" "}
-              <a href="https://ebird.org/api/keygen" target="_blank" rel="noreferrer">Get one here →</a>
-            </p>
-            {HAS_ENV && (
-              <button onClick={() => { setGuestMode(false); setApiKey(ENV_API_KEY); setSubId(ENV_USERNAME); setData({}); setStats(null); setError(""); }}
-                style={{ background: "transparent", border: "1px solid #30363d", color: "#7d8590", fontSize: 11, padding: "4px 10px", borderRadius: 6, cursor: "pointer", whiteSpace: "nowrap", marginLeft: 12 }}>
-                ← Back
-              </button>
-            )}
-          </div>
-          <div style={{ display: "flex", gap: 8 }}>
-            <input type="password" placeholder="API key..." value={inputKey}
-              onChange={e => setInputKey(e.target.value)}
-              onKeyDown={e => e.key === "Enter" && inputKey.trim() && setApiKey(inputKey.trim())}
-            />
-            <button onClick={() => inputKey.trim() && setApiKey(inputKey.trim())} disabled={!inputKey.trim()}>Next</button>
-          </div>
-        </div>
-      )}
-
-      {/* Step 2: Username */}
-      {(guestMode || !HAS_ENV) && apiKey && (error === "NEED_SUBID" || !subId) && (
-        <div style={{ background: "#161b22", border: "1px solid #30363d", borderRadius: 12, padding: 28, width: "100%", maxWidth: 480, marginBottom: 32 }}>
-          <p style={{ fontSize: 13, color: "#7d8590", marginTop: 0 }}>
-            Enter your eBird username (from{" "}
-            <a href="https://ebird.org/profile" target="_blank" rel="noreferrer">ebird.org/profile</a>
-            ). Looks like <code style={{ color: "#45d08c" }}>firstname-lastname-123</code>.
-          </p>
-          <div style={{ display: "flex", gap: 8 }}>
-            <input type="text" placeholder="eBird username..." id="subid-input"
-              onKeyDown={e => { if (e.key === "Enter") { setSubId(e.target.value.trim()); setError(""); } }}
-            />
-            <button onClick={() => { const v = document.getElementById("subid-input").value.trim(); if (v) { setSubId(v); setError(""); } }}>
-              Load
-            </button>
-          </div>
-        </div>
-      )}
-
+      {/* Loading state */}
       {loading && (
-        <div style={{ color: "#7d8590", fontSize: 13, marginBottom: 32, display: "flex", alignItems: "center", gap: 10 }}>
-          <Spinner /> Fetching your checklists...
+        <div style={{ color: "#7d8590", fontSize: 13, display: "flex", alignItems: "center", gap: 10 }}>
+          <Spinner /> Loading your data...
         </div>
       )}
 
-      {error && error !== "NEED_SUBID" && (
-        <div style={{ background: "#2d1b1b", border: "1px solid #6e3030", borderRadius: 8, padding: "12px 16px", fontSize: 13, color: "#f47c7c", marginBottom: 24, maxWidth: 560, width: "100%" }}>
+      {/* Upload zone — shown when no bundled CSV found and not yet loaded */}
+      {!loading && !hasData && (
+        <>
+          <div
+            className={`drop-zone${dragging ? " dragging" : ""}`}
+            onClick={() => fileInputRef.current?.click()}
+            onDragOver={e => { e.preventDefault(); setDragging(true); }}
+            onDragLeave={() => setDragging(false)}
+            onDrop={handleDrop}
+          >
+            <input ref={fileInputRef} type="file" accept=".csv" style={{ display: "none" }}
+              onChange={e => processFile(e.target.files[0])} />
+            <>
+              <div style={{ fontSize: 32, marginBottom: 12 }}>📂</div>
+              <div style={{ fontSize: 14, color: "#e6edf3", marginBottom: 8, fontWeight: 500 }}>
+                No data file found
+              </div>
+              <div style={{ fontSize: 12, color: "#7d8590", marginBottom: 16, lineHeight: 1.7 }}>
+                To host your own heatmap, place your eBird CSV at<br />
+                <code style={{ color: "#45d08c" }}>public/ebird-data.csv</code> in your project.<br /><br />
+                {ALLOW_VISITOR_UPLOAD && (
+                  <>Or upload a CSV below to preview it now.<br />
+                  Download yours from{" "}
+                  <a href="https://ebird.org/downloadMyData" target="_blank" rel="noreferrer" onClick={e => e.stopPropagation()}>
+                    ebird.org/downloadMyData
+                  </a>.</>
+                )}
+              </div>
+              {ALLOW_VISITOR_UPLOAD && (
+                <button onClick={e => { e.stopPropagation(); fileInputRef.current?.click(); }}>
+                  Choose CSV file
+                </button>
+              )}
+            </>
+          </div>
+        </>
+      )}
+
+      {/* Error */}
+      {error && (
+        <div style={{
+          background: "#2d1b1b", border: "1px solid #6e3030",
+          borderRadius: 8, padding: "12px 16px",
+          fontSize: 13, color: "#f47c7c",
+          marginTop: 16, maxWidth: 560, width: "100%",
+        }}>
           ⚠️ {error}
         </div>
       )}
 
-      {/* Try yourself button — only shown when env vars are powering the view */}
-      {HAS_ENV && !guestMode && stats && !loading && (
-        <button
-          onClick={() => { setGuestMode(true); setApiKey(""); setSubId(""); setData({}); setStats(null); setError(""); setInputKey(""); }}
-          style={{
-            background: "transparent",
-            border: "1px solid #30363d",
-            color: "#7d8590",
-            fontSize: 12,
-            padding: "7px 16px",
-            borderRadius: 8,
-            cursor: "pointer",
-            marginBottom: 24,
-            transition: "border-color 0.2s, color 0.2s",
-          }}
-          onMouseEnter={e => { e.target.style.borderColor = "#45d08c"; e.target.style.color = "#45d08c"; }}
-          onMouseLeave={e => { e.target.style.borderColor = "#30363d"; e.target.style.color = "#7d8590"; }}
-        >
-          🔭 Try with your own account
-        </button>
-      )}
-
-      {/* Stats */}
-      {stats && !loading && (
+      {/* Stats bar */}
+      {stats && hasData && (
         <div style={{ display: "flex", gap: 0, marginBottom: 28, background: "#161b22", borderRadius: 10, border: "1px solid #30363d", overflow: "hidden" }}>
           {[
             { value: stats.totalChecklists, label: "checklists" },
@@ -513,7 +511,7 @@ export default function App() {
       )}
 
       {/* Heatmap */}
-      {Object.keys(data).length > 0 && !loading && (
+      {hasData && (
         <div style={{ background: "#161b22", border: "1px solid #30363d", borderRadius: 12, padding: "24px 28px", overflowX: "auto", maxWidth: "100%" }}>
           {/* Month labels */}
           <div style={{ display: "flex", marginLeft: 30, marginBottom: 6 }}>
@@ -550,11 +548,7 @@ export default function App() {
                         key={di}
                         className={`cell${date ? " cell-active" : ""}${isSelected ? " cell-selected" : ""}`}
                         style={{ background: color }}
-                        onClick={() => {
-                          if (!date) return;
-                          setSelectedDate(date === selectedDate ? null : date);
-                          setTooltip(null);
-                        }}
+                        onClick={() => { if (!date) return; setSelectedDate(date === selectedDate ? null : date); setTooltip(null); }}
                         onMouseEnter={e => {
                           if (!date || selectedDate) return;
                           setTooltip({ x: e.clientX, y: e.clientY, date, checklists: dayData?.checklists || 0, species: dayData?.species || 0 });
@@ -583,7 +577,7 @@ export default function App() {
         </div>
       )}
 
-      {/* Hover Tooltip */}
+      {/* Hover tooltip */}
       {tooltip && !selectedDate && (
         <div className="tooltip" style={{ left: tooltip.x + 14, top: tooltip.y - 70 }}>
           <div style={{ color: "#e6edf3", fontWeight: 500, marginBottom: 6, fontSize: 12 }}>
@@ -601,20 +595,19 @@ export default function App() {
         </div>
       )}
 
-      {/* Day Detail Panel */}
+      {/* Day detail panel */}
       {selectedDate && (
         <DayPanel
           date={selectedDate}
           dayData={data[selectedDate] || null}
-          apiKey={apiKey}
-          allChecklists={allChecklists}
           onClose={() => setSelectedDate(null)}
-          useProxy={HAS_ENV && !guestMode}
         />
       )}
 
       <p style={{ fontSize: 11, color: "#484f58", marginTop: 32, textAlign: "center" }}>
-        Data via eBird API · Your API key is never stored
+        {csvSource === "bundled"
+          ? "Data from bundled eBird export · Parsed locally in your browser"
+          : "Data from eBird MyData export · Parsed locally, nothing uploaded to any server"}
       </p>
     </div>
   );
