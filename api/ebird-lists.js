@@ -25,7 +25,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const url = `https://ebird.org/api/v2/product/lists/${subId}?maxResults=200&offset=${offset}`;
+    const url = `https://api.ebird.org/v2/product/lists/${subId}?maxResults=200&offset=${offset}`;
     const upstream = await fetch(url, {
       headers: {
         "X-eBirdApiToken": apiKey,
