@@ -77,7 +77,7 @@ function Spinner() {
   );
 }
 
-function DayPanel({ date, dayData, apiKey, allChecklists, onClose }) {
+function DayPanel({ date, dayData, apiKey, allChecklists, onClose, useProxy }) {
   const [checklists, setChecklists] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -92,10 +92,12 @@ function DayPanel({ date, dayData, apiKey, allChecklists, onClose }) {
         const detailed = await Promise.all(
           dayItems.slice(0, 6).map(async (c) => {
             try {
-              const res = await fetch(
-                `https://api.ebird.org/v2/product/checklist/view/${c.subId}`,
-                { headers: { "X-eBirdApiToken": apiKey } }
-              );
+              const res = useProxy
+                ? await fetch(`/api/ebird-checklist?checklistId=${c.subId}`)
+                : await fetch(
+                    `https://api.ebird.org/v2/product/checklist/view/${c.subId}`,
+                    { headers: { "X-eBirdApiToken": apiKey } }
+                  );
               if (!res.ok) return { ...c, obs: [], locName: c.loc?.name || "Unknown location" };
               const json = await res.json();
               return { ...c, obs: json.obs || [], locName: json.loc?.name || c.loc?.name || "Unknown location", durationHrs: json.durationHrs };
@@ -294,11 +296,20 @@ export default function App() {
       const oneYearAgo = new Date();
       oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
 
+      // Use server-side proxy when env vars are set (keeps API key off the browser).
+      // Fall back to direct eBird call for guest mode with a user-supplied key.
+      const useProxy = HAS_ENV && !guestMode;
+
       while (!done) {
-        const res = await fetch(
-          `https://api.ebird.org/v2/product/lists/${subId}?maxResults=200&offset=${offset}`,
-          { headers: { "X-eBirdApiToken": key } }
-        );
+        let res;
+        if (useProxy) {
+          res = await fetch(`/api/ebird-lists?subId=${subId}&offset=${offset}`);
+        } else {
+          res = await fetch(
+            `https://ebird.org/api/v2/product/lists/${subId}?maxResults=200&offset=${offset}`,
+            { headers: { "X-eBirdApiToken": key } }
+          );
+        }
         if (!res.ok) throw new Error(`API error: ${res.status} — check your API key and eBird username.`);
         const json = await res.json();
         if (!Array.isArray(json) || json.length === 0) break;
@@ -326,7 +337,7 @@ export default function App() {
       setError(e.message);
     }
     setLoading(false);
-  }, [subId]);
+  }, [subId, guestMode]);
 
   useEffect(() => { if (apiKey && subId) fetchData(apiKey); }, [apiKey, subId, fetchData]);
 
@@ -598,6 +609,7 @@ export default function App() {
           apiKey={apiKey}
           allChecklists={allChecklists}
           onClose={() => setSelectedDate(null)}
+          useProxy={HAS_ENV && !guestMode}
         />
       )}
 
