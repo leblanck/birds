@@ -8,8 +8,6 @@
  *   subId    — eBird user ID (e.g. NDE2OTMxOA)
  *   offset   — pagination offset (default 0)
  */
-export const config = { runtime: "nodejs20.x" };
-
 export default async function handler(req, res) {
   if (req.method !== "GET") {
     return res.status(405).json({ error: "Method not allowed" });
@@ -35,7 +33,6 @@ export default async function handler(req, res) {
       },
     });
 
-    // Log non-200s for easier debugging in Vercel function logs
     if (!upstream.ok) {
       const text = await upstream.text();
       console.error(`eBird API error ${upstream.status}:`, text);
