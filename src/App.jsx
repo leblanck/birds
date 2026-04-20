@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 
 // On mobile, cells are slightly larger for easier tapping
 const CELL_SIZE = 13;
@@ -79,12 +79,14 @@ function parseEbirdCSV(text) {
 
   const subIdCol    = col("Submission ID");
   const dateCol     = col("Date");
-  const locationCol = col("Location");
+  const locationCol = headers.findIndex(h => h.toLowerCase() === "location");
   const timeCol     = col("Time");
   const durationCol = col("Duration");
   const speciesCol  = col("Common Name");
   const countCol    = col("Count");
   const allObsCol   = col("All Obs");
+  const latCol      = col("Latitude");
+  const lngCol      = col("Longitude");
 
   if (dateCol === -1 || subIdCol === -1) {
     throw new Error("CSV is missing expected columns. Make sure you exported from ebird.org/downloadMyData.");
@@ -117,6 +119,8 @@ function parseEbirdCSV(text) {
         subId,
         date: dateStr,
         locName: get(locationCol) || "Unknown location",
+        lat: parseFloat(get(latCol)) || null,
+        lng: parseFloat(get(lngCol)) || null,
         time: get(timeCol),
         duration: get(durationCol),
         allObsReported: get(allObsCol) === "1",
@@ -141,13 +145,79 @@ function parseEbirdCSV(text) {
       checklistDetails: checklists,
     };
   }
-  return data;
+
+  // ── Aggregate chart data from all checklists ───────────────────────────────
+  const allChecklists = Object.values(checklistMeta);
+
+  // Top species by total individual count (filter out X/unknown counts)
+  const speciesCounts = {};
+  for (const cl of allChecklists) {
+    for (const obs of cl.obs) {
+      if (!obs.comName) continue;
+      const n = parseInt(obs.howManyStr, 10);
+      speciesCounts[obs.comName] = (speciesCounts[obs.comName] || 0) + (isNaN(n) ? 1 : n);
+    }
+  }
+  const topSpecies = Object.entries(speciesCounts)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 5)
+    .map(([name, count]) => ({ name, count }));
+
+  // Checklists per month
+  const monthCounts = Array(12).fill(0);
+  for (const cl of allChecklists) {
+    const m = new Date(cl.date + "T12:00:00").getMonth();
+    if (!isNaN(m)) monthCounts[m]++;
+  }
+  const byMonth = monthCounts.map((count, i) => ({
+    label: ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"][i],
+    count,
+  }));
+
+  // Top locations by checklist count
+  const locationCounts = {};
+  for (const cl of allChecklists) {
+    if (!cl.locName || cl.locName === "Unknown location") continue;
+    locationCounts[cl.locName] = (locationCounts[cl.locName] || 0) + 1;
+  }
+  const topLocations = Object.entries(locationCounts)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 10)
+    .map(([name, count]) => ({ name, count }));
+
+  // Time of day distribution (hour buckets)
+  const hourCounts = Array(24).fill(0);
+  for (const cl of allChecklists) {
+    if (!cl.time) continue;
+    const hour = parseInt(cl.time.split(":")[0], 10);
+    if (!isNaN(hour)) hourCounts[hour]++;
+  }
+  const byHour = hourCounts.map((count, h) => ({
+    label: h === 0 ? "12a" : h < 12 ? `${h}a` : h === 12 ? "12p" : `${h-12}p`,
+    count,
+    h,
+  }));
+
+  // Location pins: deduplicate by locName, sum checklist counts, keep one lat/lng per location
+  const locationPins = {};
+  for (const cl of allChecklists) {
+    if (cl.lat == null || cl.lng == null) continue;
+    const key = cl.locName || `${cl.lat.toFixed(3)},${cl.lng.toFixed(3)}`;
+    if (!locationPins[key]) locationPins[key] = { name: cl.locName, lat: cl.lat, lng: cl.lng, count: 0 };
+    locationPins[key].count++;
+  }
+  const pins = Object.values(locationPins);
+
+  return { data, charts: { topSpecies, byMonth, topLocations, byHour, pins } };
 }
 
-function applyDateFilter(parsed) {
+function applyDateFilter({ data, charts }) {
   const oneYearAgo = new Date();
   oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
-  return Object.fromEntries(Object.entries(parsed).filter(([d]) => new Date(d) >= oneYearAgo));
+  return {
+    data: Object.fromEntries(Object.entries(data).filter(([d]) => new Date(d) >= oneYearAgo)),
+    charts,
+  };
 }
 
 // ── Spinner ────────────────────────────────────────────────────────────────────
@@ -292,11 +362,380 @@ function DayPanel({ date, dayData, onClose }) {
 
 // ── Main app ───────────────────────────────────────────────────────────────────
 
+
+// ── Chart helpers ──────────────────────────────────────────────────────────────
+
+function SectionTitle({ children }) {
+  return (
+    <div style={{ fontSize: 11, fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", color: "#999999", marginBottom: 14 }}>
+      {children}
+    </div>
+  );
+}
+
+function HBarChart({ items, maxVal, color = "#fc4c02", labelWidth = 130 }) {
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 7 }}>
+      {items.map(({ name, count }) => (
+        <div key={name} style={{ display: "flex", alignItems: "center", gap: 10 }}>
+          <div style={{ width: labelWidth, flexShrink: 0, fontSize: 12, color: "#dddddd", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", textAlign: "right" }}>
+            {name}
+          </div>
+          <div style={{ flex: 1, height: 10, background: "#2a2a2a", borderRadius: 3, overflow: "hidden" }}>
+            <div style={{
+              height: "100%", borderRadius: 3,
+              width: `${Math.max(2, (count / maxVal) * 100)}%`,
+              background: color,
+              transition: "width 0.4s ease",
+            }} />
+          </div>
+          <div style={{ width: 36, flexShrink: 0, fontSize: 11, color: "#999999", textAlign: "right" }}>
+            {count}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function VBarChart({ items, maxVal, color = "#fc4c02", highlightFn }) {
+  return (
+    <div style={{ display: "flex", alignItems: "flex-end", gap: 3, height: 80 }}>
+      {items.map(({ label, count, h }) => {
+        const pct = maxVal > 0 ? (count / maxVal) * 100 : 0;
+        const highlight = highlightFn ? highlightFn(h ?? label) : true;
+        return (
+          <div key={label} style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", gap: 3 }}>
+            <div style={{ width: "100%", height: 68, display: "flex", alignItems: "flex-end" }}>
+              <div style={{
+                width: "100%", borderRadius: "2px 2px 0 0",
+                height: `${Math.max(pct > 0 ? 4 : 0, pct)}%`,
+                background: highlight ? color : "#333333",
+                transition: "height 0.4s ease",
+              }} />
+            </div>
+            <div style={{ fontSize: 9, color: "#555555", textAlign: "center", lineHeight: 1 }}>{label}</div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+function ChartCard({ title, children }) {
+  return (
+    <div style={{
+      background: "#242424",
+      border: "1px solid #333333",
+      borderRadius: 12,
+      padding: "20px 20px 18px",
+      flex: "1 1 300px",
+      minWidth: 0,
+    }}>
+      <SectionTitle>{title}</SectionTitle>
+      {children}
+    </div>
+  );
+}
+
+function ChartsSection({ charts }) {
+  if (!charts) return null;
+
+  const { topSpecies, byMonth, topLocations, byHour, pins } = charts;
+
+  const maxSpecies  = Math.max(...topSpecies.map(s => s.count), 1);
+  const maxMonth    = Math.max(...byMonth.map(m => m.count), 1);
+  const maxLocation = Math.max(...topLocations.map(l => l.count), 1);
+  const maxHour     = Math.max(...byHour.map(h => h.count), 1);
+
+  // Highlight "daytime" hours 5am–8pm in the time chart
+  const isDaytime = (h) => h >= 5 && h <= 20;
+
+  return (
+    <div style={{ width: "100%", marginTop: 32 }}>
+      <div style={{ fontSize: 11, fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", color: "#555555", marginBottom: 20, textAlign: "center" }}>
+        Insights
+      </div>
+
+      {/* Map — full width */}
+      {pins && pins.length > 0 && (
+        <div style={{ background: "#242424", border: "1px solid #333333", borderRadius: 12, padding: "20px 20px 18px", marginBottom: 16 }}>
+          <SectionTitle>Birding locations</SectionTitle>
+          <LocationMap pins={pins} />
+        </div>
+      )}
+
+      {/* Two-column grid that stacks on mobile */}
+      <div style={{ display: "flex", flexWrap: "wrap", gap: 16 }}>
+
+        {/* Checklists by month */}
+        <ChartCard title="Checklists by month">
+          <VBarChart items={byMonth} maxVal={maxMonth} />
+        </ChartCard>
+
+        {/* Time of day */}
+        <ChartCard title="Time of day">
+          <VBarChart items={byHour} maxVal={maxHour} highlightFn={isDaytime} />
+          <div style={{ fontSize: 10, color: "#555555", marginTop: 8 }}>
+            Lighter bars = nighttime hours
+          </div>
+        </ChartCard>
+
+        {/* Top species */}
+        {topSpecies.length > 0 && (
+          <ChartCard title="Top species (by count)">
+            <HBarChart items={topSpecies} maxVal={maxSpecies} />
+          </ChartCard>
+        )}
+
+        {/* Top locations */}
+        {topLocations.length > 0 && (
+          <ChartCard title="Top locations (by checklists)">
+            <HBarChart items={topLocations} maxVal={maxLocation} color="#d93e00" />
+          </ChartCard>
+        )}
+
+      </div>
+    </div>
+  );
+}
+
+
+// ── Location map ───────────────────────────────────────────────────────────────
+// Mercator projection: maps lat/lng to x/y within a bounding box
+// ── Mercator projection helpers ────────────────────────────────────────────────
+function mercatorProject(lat, lng) {
+  const toRad = d => d * Math.PI / 180;
+  return {
+    x: lng,
+    y: Math.log(Math.tan(Math.PI / 4 + toRad(lat) / 2)) * (180 / Math.PI),
+  };
+}
+
+const COORD_SIZE = 1000;
+
+function makeProjector(minLat, maxLat, minLng, maxLng) {
+  const tl = mercatorProject(maxLat, minLng);
+  const br = mercatorProject(minLat, maxLng);
+  const projW = br.x - tl.x;
+  const projH = tl.y - br.y;
+  const scale = COORD_SIZE / Math.max(projW, projH);
+  const offsetX = (COORD_SIZE - projW * scale) / 2;
+  const offsetY = (COORD_SIZE - projH * scale) / 2;
+  return (lat, lng) => {
+    const p = mercatorProject(lat, lng);
+    return {
+      x: offsetX + ((p.x - tl.x) * scale),
+      y: offsetY + ((tl.y - p.y) * scale),
+    };
+  };
+}
+
+// Convert a GeoJSON ring of [lng, lat] coords to an SVG path d string
+function ringToPath(ring, project) {
+  return ring.map(([lng, lat], i) => {
+    const { x, y } = project(lat, lng);
+    return `${i === 0 ? "M" : "L"}${x.toFixed(1)},${y.toFixed(1)}`;
+  }).join(" ") + " Z";
+}
+
+function geometryToPaths(geometry, project) {
+  const paths = [];
+  if (geometry.type === "Polygon") {
+    paths.push(geometry.coordinates.map(ring => ringToPath(ring, project)).join(" "));
+  } else if (geometry.type === "MultiPolygon") {
+    for (const poly of geometry.coordinates) {
+      paths.push(poly.map(ring => ringToPath(ring, project)).join(" "));
+    }
+  }
+  return paths;
+}
+
+function LocationMap({ pins }) {
+  const [hoveredPin, setHoveredPin] = React.useState(null);
+  const [geoData, setGeoData] = React.useState(null);
+  const [geoError, setGeoError] = React.useState(false);
+  const [zoom, setZoom] = React.useState(1); // 1 = default, >1 = zoomed in, <1 = zoomed out
+
+  // Fetch US states TopoJSON (geographic coords) on mount
+  React.useEffect(() => {
+    fetch("https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json")
+      .then(r => r.json())
+      .then(topo => {
+        const decoded = decodeTopoJSON(topo, "states");
+        setGeoData(decoded);
+      })
+      .catch(() => setGeoError(true));
+  }, []);
+
+  // Minimal TopoJSON decoder (handles the us-atlas format)
+  function decodeTopoJSON(topo, objectName) {
+    const obj = topo.objects[objectName];
+    const arcs = topo.arcs;
+    const scale = topo.transform?.scale || [1, 1];
+    const translate = topo.transform?.translate || [0, 0];
+
+    // Decode arcs from delta-encoded integers to coordinates
+    const decodedArcs = arcs.map(arc => {
+      let x = 0, y = 0;
+      return arc.map(([dx, dy]) => {
+        x += dx; y += dy;
+        return [x * scale[0] + translate[0], y * scale[1] + translate[1]];
+      });
+    });
+
+    function stitchArcs(arcIndices) {
+      const ring = [];
+      for (const idx of arcIndices) {
+        const arc = idx < 0 ? [...decodedArcs[~idx]].reverse() : decodedArcs[idx];
+        ring.push(...(ring.length ? arc.slice(1) : arc));
+      }
+      return ring;
+    }
+
+    const features = obj.geometries.map(geom => {
+      let geometry;
+      if (geom.type === "Polygon") {
+        geometry = { type: "Polygon", coordinates: geom.arcs.map(stitchArcs) };
+      } else if (geom.type === "MultiPolygon") {
+        geometry = { type: "MultiPolygon", coordinates: geom.arcs.map(p => p.map(stitchArcs)) };
+      }
+      return { type: "Feature", properties: geom.properties, geometry };
+    });
+
+    return features;
+  }
+
+  if (!pins || pins.length === 0) return null;
+
+  // Bounding box from pins with padding
+  const lats = pins.map(p => p.lat);
+  const lngs = pins.map(p => p.lng);
+  const rawMinLat = Math.min(...lats), rawMaxLat = Math.max(...lats);
+  const rawMinLng = Math.min(...lngs), rawMaxLng = Math.max(...lngs);
+  // Base padding of 1.2 (generous) divided by zoom — zooming in shrinks the padding
+  const basePad = 1.2 / zoom;
+  const latSpan = Math.max(rawMaxLat - rawMinLat, 1.5);
+  const lngSpan = Math.max(rawMaxLng - rawMinLng, 1.5);
+  const minLat = rawMinLat - latSpan * basePad;
+  const maxLat = rawMaxLat + latSpan * basePad;
+  const minLng = rawMinLng - lngSpan * basePad;
+  const maxLng = rawMaxLng + lngSpan * basePad;
+
+  const project = makeProjector(minLat, maxLat, minLng, maxLng);
+  const maxCount = Math.max(...pins.map(p => p.count), 1);
+
+
+  return (
+    <div style={{ position: "relative" }}>
+      <svg
+        viewBox={`0 0 ${COORD_SIZE} ${COORD_SIZE}`}
+        preserveAspectRatio="xMidYMid meet"
+        style={{ width: "100%", height: 260, display: "block", borderRadius: 8, background: "#1e1e1e" }}
+      >
+        {/* Ocean/background fill */}
+        <rect x={0} y={0} width={COORD_SIZE} height={COORD_SIZE} fill="#1e1e1e" />
+
+        {/* State outlines */}
+        {geoData && geoData.map((feature, i) => {
+          if (!feature.geometry) return null;
+          const paths = geometryToPaths(feature.geometry, project);
+          return paths.map((d, j) => (
+            <path key={`${i}-${j}`} d={d} fill="#2a2a2a" stroke="#3d3d3d" strokeWidth="0.5" />
+          ));
+        })}
+
+        {!geoData && !geoError && (
+          <text x={COORD_SIZE / 2} y={COORD_SIZE / 2} textAnchor="middle" fontSize="28" fill="#555555">Loading map…</text>
+        )}
+
+        {/* Pins */}
+        {[...pins].sort((a, b) => b.count - a.count).map((pin, i) => {
+          const { x, y } = project(pin.lat, pin.lng);
+          const r = Math.max(3, Math.min(12, 3 + (pin.count / maxCount) * 9));
+          const isHovered = hoveredPin === i;
+          if (x < 0 || x > COORD_SIZE || y < 0 || y > COORD_SIZE) return null;
+          return (
+            <g key={i}
+              onMouseEnter={() => setHoveredPin(i)}
+              onMouseLeave={() => setHoveredPin(null)}
+              onTouchStart={() => setHoveredPin(hoveredPin === i ? null : i)}
+              style={{ cursor: "pointer" }}>
+              <circle cx={x} cy={y} r={r + 6} fill="transparent" />
+              <circle cx={x} cy={y} r={r}
+                fill={isHovered ? "#ff6a33" : "#fc4c02"}
+                fillOpacity={isHovered ? 1 : 0.85}
+                stroke={isHovered ? "#ffffff" : "#1a1a1a"}
+                strokeWidth={isHovered ? 1.5 : 0.75}
+              />
+            </g>
+          );
+        })}
+      </svg>
+
+      {/* Zoom controls — HTML buttons in bottom-left corner */}
+      <div style={{
+        position: "absolute", bottom: 12, left: 12,
+        display: "flex", flexDirection: "column", gap: 4,
+      }}>
+        <button
+          onClick={() => setZoom(z => Math.min(z * 1.5, 8))}
+          style={{
+            width: 36, height: 36, borderRadius: 6,
+            background: "#242424", border: "1px solid #444444",
+            color: "#dddddd", fontSize: 20, lineHeight: 1,
+            cursor: "pointer", display: "flex", alignItems: "center",
+            justifyContent: "center", padding: 0,
+            fontFamily: "monospace", minHeight: "unset",
+          }}
+        >+</button>
+        <button
+          onClick={() => setZoom(z => Math.max(z / 1.5, 0.3))}
+          style={{
+            width: 36, height: 36, borderRadius: 6,
+            background: "#242424", border: "1px solid #444444",
+            color: "#dddddd", fontSize: 20, lineHeight: 1,
+            cursor: "pointer", display: "flex", alignItems: "center",
+            justifyContent: "center", padding: 0,
+            fontFamily: "monospace", minHeight: "unset",
+          }}
+        >−</button>
+      </div>
+
+      {/* Hover tooltip */}
+      {hoveredPin !== null && pins[hoveredPin] && (
+        <div style={{
+          position: "absolute",
+          bottom: 16, left: "50%", transform: "translateX(-50%)",
+          background: "#1a1a1a",
+          border: "1px solid #333333",
+          borderRadius: 8,
+          padding: "8px 12px",
+          fontSize: 12,
+          pointerEvents: "none",
+          whiteSpace: "nowrap",
+          zIndex: 10,
+        }}>
+          <div style={{ color: "#f0f0f0", fontWeight: 500 }}>{pins[hoveredPin].name}</div>
+          <div style={{ color: "#999999", marginTop: 2 }}>
+            <span style={{ color: "#fc4c02" }}>{pins[hoveredPin].count}</span> checklist{pins[hoveredPin].count !== 1 ? "s" : ""}
+          </div>
+        </div>
+      )}
+
+      <div style={{ fontSize: 10, color: "#555555", marginTop: 8 }}>
+        {pins.length} location{pins.length !== 1 ? "s" : ""} · Dot size = checklist count · Hover for details
+      </div>
+    </div>
+  );
+}
+
 const DAY_LABELS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 const ALLOW_VISITOR_UPLOAD = true;
 
 export default function App() {
   const [data, setData]                 = useState({});
+  const [charts, setCharts]             = useState(null);
   const [stats, setStats]               = useState(null);
   const [error, setError]               = useState("");
   const [loading, setLoading]           = useState(true);
@@ -325,8 +764,9 @@ export default function App() {
     fetch("/ebird-data.csv")
       .then(res => { if (!res.ok) throw new Error("no csv"); return res.text(); })
       .then(text => {
-        const filtered = applyDateFilter(parseEbirdCSV(text));
+        const { data: filtered, charts: c } = applyDateFilter(parseEbirdCSV(text));
         setData(filtered);
+        setCharts(c);
         setStats({
           totalChecklists: Object.values(filtered).reduce((s, d) => s + d.checklists, 0),
           totalDays: Object.keys(filtered).length,
@@ -344,8 +784,9 @@ export default function App() {
     const reader = new FileReader();
     reader.onload = (e) => {
       try {
-        const filtered = applyDateFilter(parseEbirdCSV(e.target.result));
+        const { data: filtered, charts: c } = applyDateFilter(parseEbirdCSV(e.target.result));
         setData(filtered);
+        setCharts(c);
         setStats({
           totalChecklists: Object.values(filtered).reduce((s, d) => s + d.checklists, 0),
           totalDays: Object.keys(filtered).length,
@@ -679,6 +1120,9 @@ export default function App() {
           onClose={() => setSelectedDate(null)}
         />
       )}
+
+      {/* Charts */}
+      <ChartsSection charts={charts} />
 
       {/* Footer */}
       <div style={{ fontSize: 11, color: "#555555", marginTop: 28, textAlign: "center", lineHeight: 1.8 }}>
