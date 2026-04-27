@@ -9,9 +9,13 @@ const CELL_GAP  = 3;
 function getDatesLastYear() {
   const dates = [];
   const today = new Date();
-  const start = new Date(today);
-  start.setFullYear(today.getFullYear() - 1);
-  start.setDate(start.getDate() + 1);
+  // Start from exactly one year ago
+  const rawStart = new Date(today);
+  rawStart.setFullYear(today.getFullYear() - 1);
+  rawStart.setDate(rawStart.getDate() + 1);
+  // Roll back to the nearest preceding Sunday so row 0 is always Sunday
+  const start = new Date(rawStart);
+  start.setDate(start.getDate() - start.getDay());
   for (let d = new Date(start); d <= today; d.setDate(d.getDate() + 1)) {
     dates.push(new Date(d).toISOString().split("T")[0]);
   }
@@ -19,14 +23,12 @@ function getDatesLastYear() {
 }
 
 function groupByWeek(dates) {
+  // Sunday-first. getDatesLastYear guarantees dates[0] is always a Sunday.
   const weeks = [];
-  const firstDate = new Date(dates[0]);
-  const dayOfWeek = firstDate.getDay();
   let week = [];
-  for (let i = 0; i < dayOfWeek; i++) week.push(null);
   for (const date of dates) {
-    const d = new Date(date);
-    if (d.getDay() === 0 && week.length > 0) { weeks.push(week); week = []; }
+    const dow = new Date(date).getDay(); // 0=Sun
+    if (dow === 0 && week.length > 0) { weeks.push(week); week = []; }
     week.push(date);
   }
   if (week.length > 0) {
@@ -202,7 +204,7 @@ function parseEbirdCSV(text) {
   const locationPins = {};
   for (const cl of allChecklists) {
     if (cl.lat == null || cl.lng == null) continue;
-    const key = cl.locName || `${cl.lat.toFixed(3)},${cl.lng.toFixed(3)}`;
+    const key = (cl.locName || `${cl.lat.toFixed(3)},${cl.lng.toFixed(3)}`).trim().toLowerCase();
     if (!locationPins[key]) locationPins[key] = { name: cl.locName, lat: cl.lat, lng: cl.lng, count: 0 };
     locationPins[key].count++;
   }
@@ -552,7 +554,7 @@ function geometryToPaths(geometry, project) {
 }
 
 function LocationMap({ pins }) {
-  const [hoveredPin, setHoveredPin] = React.useState(null);
+  const [hoveredPin, setHoveredPin] = React.useState(null); // stores pin.name
   const [geoData, setGeoData] = React.useState(null);
   const [geoError, setGeoError] = React.useState(false);
   const [zoom, setZoom] = React.useState(1); // 1 = default, >1 = zoomed in, <1 = zoomed out
@@ -650,16 +652,16 @@ function LocationMap({ pins }) {
         )}
 
         {/* Pins */}
-        {[...pins].sort((a, b) => b.count - a.count).map((pin, i) => {
+        {[...pins].sort((a, b) => b.count - a.count).map((pin) => {
           const { x, y } = project(pin.lat, pin.lng);
-          const r = Math.max(3, Math.min(12, 3 + (pin.count / maxCount) * 9));
-          const isHovered = hoveredPin === i;
+          const r = Math.max(6, Math.min(24, 6 + (pin.count / maxCount) * 18));
+          const isHovered = hoveredPin === pin.name;
           if (x < 0 || x > COORD_SIZE || y < 0 || y > COORD_SIZE) return null;
           return (
-            <g key={i}
-              onMouseEnter={() => setHoveredPin(i)}
+            <g key={pin.name}
+              onMouseEnter={() => setHoveredPin(pin.name)}
               onMouseLeave={() => setHoveredPin(null)}
-              onTouchStart={() => setHoveredPin(hoveredPin === i ? null : i)}
+              onTouchStart={() => setHoveredPin(hoveredPin === pin.name ? null : pin.name)}
               style={{ cursor: "pointer" }}>
               <circle cx={x} cy={y} r={r + 6} fill="transparent" />
               <circle cx={x} cy={y} r={r}
@@ -703,7 +705,7 @@ function LocationMap({ pins }) {
       </div>
 
       {/* Hover tooltip */}
-      {hoveredPin !== null && pins[hoveredPin] && (
+      {hoveredPin !== null && pins.find(p => p.name === hoveredPin) && (
         <div style={{
           position: "absolute",
           bottom: 16, left: "50%", transform: "translateX(-50%)",
@@ -716,9 +718,9 @@ function LocationMap({ pins }) {
           whiteSpace: "nowrap",
           zIndex: 10,
         }}>
-          <div style={{ color: "#f0f0f0", fontWeight: 500 }}>{pins[hoveredPin].name}</div>
+          <div style={{ color: "#f0f0f0", fontWeight: 500 }}>{pins.find(p => p.name === hoveredPin).name}</div>
           <div style={{ color: "#999999", marginTop: 2 }}>
-            <span style={{ color: "#fc4c02" }}>{pins[hoveredPin].count}</span> checklist{pins[hoveredPin].count !== 1 ? "s" : ""}
+            <span style={{ color: "#fc4c02" }}>{pins.find(p => p.name === hoveredPin).count}</span> checklist{pins.find(p => p.name === hoveredPin).count !== 1 ? "s" : ""}
           </div>
         </div>
       )}
@@ -1023,11 +1025,19 @@ export default function App() {
               </div>
 
               <div style={{ display: "flex" }}>
-                {/* Day labels */}
+                {/* Day labels — use same gap as the cell grid */}
                 <div style={{ display: "flex", flexDirection: "column", gap: CELL_GAP, marginRight: 6 }}>
                   {DAY_LABELS.map((day, i) => (
-                    <div key={day} style={{ height: CELL_SIZE, fontSize: 9, color: "#999999", display: "flex", alignItems: "center", width: 24, justifyContent: "flex-end" }}>
-                      {i % 2 === 1 ? day.slice(0, 3) : ""}
+                    <div key={day} style={{
+                      height: CELL_SIZE,
+                      fontSize: 8,
+                      color: "#999999",
+                      display: "flex",
+                      alignItems: "center",
+                      width: 28,
+                      justifyContent: "flex-end",
+                    }}>
+                      {i < 6 ? DAY_LABELS[i + 1].slice(0, 3) : ""}
                     </div>
                   ))}
                 </div>
