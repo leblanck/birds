@@ -1,106 +1,160 @@
 Submission ID,Common Name,Scientific Name,Taxonomic Order,Count,State/Province,County,Location ID,Location,Latitude,Longitude,Date,Time,Protocol,Duration (Min),All Obs Reported,Distance Traveled (km),Area Covered (ha),Number of Observers,Breeding Code,Observation Details,Checklist Comments,ML Catalog Numbers
-S328668916,Canada Goose,Branta canadensis,342,3,US-ME,Cumberland,L2428363,"Willowdale Golf Course Ponds, Scarborough",43.5754165,-70.3485489,2026-04-27,04:44 PM,eBird - Traveling Count,54,1,2.482,,1
-S319507306,Mallard,Anas platyrhynchos,545,7,US-ME,Cumberland,L9076474,Forest City Cemetery,43.6346567,-70.2774657,2026-04-10,06:55 AM,eBird - Traveling Count,34,1,1.101,,1
-S328668916,Mallard,Anas platyrhynchos,545,4,US-ME,Cumberland,L2428363,"Willowdale Golf Course Ponds, Scarborough",43.5754165,-70.3485489,2026-04-27,04:44 PM,eBird - Traveling Count,54,1,2.482,,1
-S327730682,American Black Duck,Anas rubripes,571,2,US-ME,Cumberland,L2706386,Payson Park,43.68127,-70.267014,2026-04-26,09:04 AM,eBird - Traveling Count,8,1,.12,,1
-S327718904,Common Eider,Somateria mollissima,715,3,US-ME,Cumberland,L2706386,Payson Park,43.68127,-70.267014,2026-04-26,08:13 AM,eBird - Traveling Count,48,1,1.15,,1
-S318223222,Wild Turkey,Meleagris gallopavo,1274,8,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-07,06:48 AM,eBird - Casual Observation,,0,,,1
-S318746783,Wild Turkey,Meleagris gallopavo,1274,7,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-08,11:08 AM,eBird - Stationary Count,1,1,,,1
-S319196479,Wild Turkey,Meleagris gallopavo,1274,7,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-09,11:19 AM,eBird - Stationary Count,1,1,,,1
-S320740429,Wild Turkey,Meleagris gallopavo,1274,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-12,12:26 PM,eBird - Stationary Count,13,1,,,1
-S320924964,Wild Turkey,Meleagris gallopavo,1274,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-12,07:05 PM,eBird - Stationary Count,1,1,,,1
-S322181326,Wild Turkey,Meleagris gallopavo,1274,3,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-15,04:40 PM,eBird - Stationary Count,1,1,,,1
-S333105498,Wild Turkey,Meleagris gallopavo,1274,2,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-05-05,12:10 PM,eBird - Stationary Count,12,1,,,1
-S324776271,Mourning Dove,Zenaida macroura,2412,2,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-20,03:22 PM,eBird - Traveling Count,7,1,.092,,1
-S327718904,Mourning Dove,Zenaida macroura,2412,1,US-ME,Cumberland,L2706386,Payson Park,43.68127,-70.267014,2026-04-26,08:13 AM,eBird - Traveling Count,48,1,1.15,,1
-S330391580,Willet,Tringa semipalmata,6147,3,US-MA,Bristol,L784803,Allens Pond WS--Beach Loop (Mass Audubon),41.5070668,-71.023618,2026-05-01,09:29 AM,eBird - Traveling Count,57,1,1.867,,1
-S331077773,Willet,Tringa semipalmata,6147,2,US-MA,Bristol,L5086328,West Island Beach,41.5851223,-70.8219668,2026-05-02,10:39 AM,eBird - Traveling Count,22,1,.556,,1
-S331077773,Greater Yellowlegs,Tringa melanoleuca,6154,1,US-MA,Bristol,L5086328,West Island Beach,41.5851223,-70.8219668,2026-05-02,10:39 AM,eBird - Traveling Count,22,1,.556,,1
-S327718904,American Herring Gull,Larus smithsonianus,6539,4,US-ME,Cumberland,L2706386,Payson Park,43.68127,-70.267014,2026-04-26,08:13 AM,eBird - Traveling Count,48,1,1.15,,1
-S330391580,Great Black-backed Gull,Larus marinus,6562,2,US-MA,Bristol,L784803,Allens Pond WS--Beach Loop (Mass Audubon),41.5070668,-71.023618,2026-05-01,09:29 AM,eBird - Traveling Count,57,1,1.867,,1
-S331077773,Common Tern,Sterna hirundo,6748,2,US-MA,Bristol,L5086328,West Island Beach,41.5851223,-70.8219668,2026-05-02,10:39 AM,eBird - Traveling Count,22,1,.556,,1
-S330391580,Double-crested Cormorant,Nannopterum auritum,7424,2,US-MA,Bristol,L784803,Allens Pond WS--Beach Loop (Mass Audubon),41.5070668,-71.023618,2026-05-01,09:29 AM,eBird - Traveling Count,57,1,1.867,,1,,,,656273451
-S330425959,Black Vulture,Coragyps atratus,7811,1,US-MA,Bristol,L11660244,Destruction Brook Woods (DNRT),41.570637,-71.0175991,2026-05-01,07:42 AM,eBird - Traveling Count,83,1,1.5,,2
-S330391580,Osprey,Pandion haliaetus,7832,1,US-MA,Bristol,L784803,Allens Pond WS--Beach Loop (Mass Audubon),41.5070668,-71.023618,2026-05-01,09:29 AM,eBird - Traveling Count,57,1,1.867,,1
-S333105498,Red-tailed Hawk,Buteo jamaicensis,8506,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-05-05,12:10 PM,eBird - Stationary Count,12,1,,,1
-S327157311,Red-bellied Woodpecker,Melanerpes carolinus,11199,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-25,11:31 AM,eBird - Stationary Count,14,1,,,1
-S321074228,Downy Woodpecker,Dryobates pubescens,11400,2,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-13,07:35 AM,eBird - Stationary Count,1,1,,,1
-S322631067,Downy Woodpecker,Dryobates pubescens,11400,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-16,04:53 PM,eBird - Stationary Count,2,1,,,1
-S326664337,Downy Woodpecker,Dryobates pubescens,11400,2,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-24,03:53 PM,eBird - Stationary Count,9,1,,,1
-S333105498,Downy Woodpecker,Dryobates pubescens,11400,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-05-05,12:10 PM,eBird - Stationary Count,12,1,,,1
-S326963663,Downy Woodpecker,Dryobates pubescens,11400,1,US-ME,Cumberland,L1579234,"Robinson Woods Preserve, Cape Elizabeth",43.6106674,-70.2164627,2026-04-25,07:19 AM,eBird - Traveling Count,39,1,1.93,,1
-S333184005,Hairy Woodpecker,Leuconotopicus villosus,11427,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-05-05,03:02 PM,eBird - Stationary Count,6,1,,,1,,,,656654483
-S320924964,Eastern Phoebe,Sayornis phoebe,17007,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-12,07:05 PM,eBird - Stationary Count,1,1,,,1
-S330425959,Blue Jay,Cyanocitta cristata,21294,4,US-MA,Bristol,L11660244,Destruction Brook Woods (DNRT),41.570637,-71.0175991,2026-05-01,07:42 AM,eBird - Traveling Count,83,1,1.5,,2
-S333105498,Blue Jay,Cyanocitta cristata,21294,2,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-05-05,12:10 PM,eBird - Stationary Count,12,1,,,1,,,,656654431
-S333184005,Blue Jay,Cyanocitta cristata,21294,3,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-05-05,03:02 PM,eBird - Stationary Count,6,1,,,1
-S319507306,American Crow,Corvus brachyrhynchos,21557,2,US-ME,Cumberland,L9076474,Forest City Cemetery,43.6346567,-70.2774657,2026-04-10,06:55 AM,eBird - Traveling Count,34,1,1.101,,1
-S318223222,American Crow,Corvus brachyrhynchos,21557,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-07,06:48 AM,eBird - Casual Observation,,0,,,1
-S319233187,American Crow,Corvus brachyrhynchos,21557,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-09,12:41 PM,eBird - Stationary Count,1,1,,,1
-S333105498,American Crow,Corvus brachyrhynchos,21557,2,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-05-05,12:10 PM,eBird - Stationary Count,12,1,,,1
-S326963663,American Crow,Corvus brachyrhynchos,21557,1,US-ME,Cumberland,L1579234,"Robinson Woods Preserve, Cape Elizabeth",43.6106674,-70.2164627,2026-04-25,07:19 AM,eBird - Traveling Count,39,1,1.93,,1
-S330425959,Black-capped Chickadee,Poecile atricapillus,22065,1,US-MA,Bristol,L11660244,Destruction Brook Woods (DNRT),41.570637,-71.0175991,2026-05-01,07:42 AM,eBird - Traveling Count,83,1,1.5,,2
-S319233187,Black-capped Chickadee,Poecile atricapillus,22065,2,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-09,12:41 PM,eBird - Stationary Count,1,1,,,1
-S320800124,Black-capped Chickadee,Poecile atricapillus,22065,2,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-12,02:19 PM,eBird - Stationary Count,1,1,,,1
-S321074228,Black-capped Chickadee,Poecile atricapillus,22065,5,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-13,07:35 AM,eBird - Stationary Count,1,1,,,1
-S321625938,Black-capped Chickadee,Poecile atricapillus,22065,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-14,10:42 AM,eBird - Traveling Count,24,1,.12,,1
-S321644255,Black-capped Chickadee,Poecile atricapillus,22065,3,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-14,11:35 AM,eBird - Traveling Count,19,1,.098,,1
-S322181326,Black-capped Chickadee,Poecile atricapillus,22065,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-15,04:40 PM,eBird - Stationary Count,1,1,,,1
-S322631067,Black-capped Chickadee,Poecile atricapillus,22065,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-16,04:53 PM,eBird - Stationary Count,2,1,,,1
-S324776271,Black-capped Chickadee,Poecile atricapillus,22065,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-20,03:22 PM,eBird - Traveling Count,7,1,.092,,1
-S333105498,Black-capped Chickadee,Poecile atricapillus,22065,3,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-05-05,12:10 PM,eBird - Stationary Count,12,1,,,1
-S333184005,Black-capped Chickadee,Poecile atricapillus,22065,2,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-05-05,03:02 PM,eBird - Stationary Count,6,1,,,1
-S326963663,Black-capped Chickadee,Poecile atricapillus,22065,1,US-ME,Cumberland,L1579234,"Robinson Woods Preserve, Cape Elizabeth",43.6106674,-70.2164627,2026-04-25,07:19 AM,eBird - Traveling Count,39,1,1.93,,1
-S330425959,Tufted Titmouse,Baeolophus bicolor,22160,1,US-MA,Bristol,L11660244,Destruction Brook Woods (DNRT),41.570637,-71.0175991,2026-05-01,07:42 AM,eBird - Traveling Count,83,1,1.5,,2
-S320740429,Tufted Titmouse,Baeolophus bicolor,22160,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-12,12:26 PM,eBird - Stationary Count,13,1,,,1
-S321644255,Tufted Titmouse,Baeolophus bicolor,22160,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-14,11:35 AM,eBird - Traveling Count,19,1,.098,,1
-S326664337,Tufted Titmouse,Baeolophus bicolor,22160,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-24,03:53 PM,eBird - Stationary Count,9,1,,,1
-S333105498,Tufted Titmouse,Baeolophus bicolor,22160,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-05-05,12:10 PM,eBird - Stationary Count,12,1,,,1
-S330391580,Tree Swallow,Tachycineta bicolor,24064,1,US-MA,Bristol,L784803,Allens Pond WS--Beach Loop (Mass Audubon),41.5070668,-71.023618,2026-05-01,09:29 AM,eBird - Traveling Count,57,1,1.867,,1
-S330425959,White-breasted Nuthatch,Sitta carolinensis,26889,1,US-MA,Bristol,L11660244,Destruction Brook Woods (DNRT),41.570637,-71.0175991,2026-05-01,07:42 AM,eBird - Traveling Count,83,1,1.5,,2
-S333105498,Gray Catbird,Dumetella carolinensis,28000,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-05-05,12:10 PM,eBird - Stationary Count,12,1,,,1,,,,656654414
-S330391580,American Robin,Turdus migratorius,28633,2,US-MA,Bristol,L784803,Allens Pond WS--Beach Loop (Mass Audubon),41.5070668,-71.023618,2026-05-01,09:29 AM,eBird - Traveling Count,57,1,1.867,,1
-S319507306,American Robin,Turdus migratorius,28633,1,US-ME,Cumberland,L9076474,Forest City Cemetery,43.6346567,-70.2774657,2026-04-10,06:55 AM,eBird - Traveling Count,34,1,1.101,,1
-S320740429,American Robin,Turdus migratorius,28633,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-12,12:26 PM,eBird - Stationary Count,13,1,,,1
-S320800124,American Robin,Turdus migratorius,28633,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-12,02:19 PM,eBird - Stationary Count,1,1,,,1
-S320924964,American Robin,Turdus migratorius,28633,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-12,07:05 PM,eBird - Stationary Count,1,1,,,1
-S321074228,American Robin,Turdus migratorius,28633,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-13,07:35 AM,eBird - Stationary Count,1,1,,,1
-S321644255,American Robin,Turdus migratorius,28633,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-14,11:35 AM,eBird - Traveling Count,19,1,.098,,1,,,,654986112
-S324828923,American Robin,Turdus migratorius,28633,2,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-20,05:50 PM,eBird - Traveling Count,31,1,2.574,,1
-S333184005,American Robin,Turdus migratorius,28633,2,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-05-05,03:02 PM,eBird - Stationary Count,6,1,,,1
-S328668916,American Robin,Turdus migratorius,28633,1,US-ME,Cumberland,L2428363,"Willowdale Golf Course Ponds, Scarborough",43.5754165,-70.3485489,2026-04-27,04:44 PM,eBird - Traveling Count,54,1,2.482,,1
-S330391580,House Sparrow,Passer domesticus,31534,1,US-MA,Bristol,L784803,Allens Pond WS--Beach Loop (Mass Audubon),41.5070668,-71.023618,2026-05-01,09:29 AM,eBird - Traveling Count,57,1,1.867,,1
-S321649804,House Finch,Haemorhous mexicanus,32310,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-14,12:06 PM,eBird - Stationary Count,1,1,,,1,,,,654985970
-S327718904,House Finch,Haemorhous mexicanus,32310,2,US-ME,Cumberland,L2706386,Payson Park,43.68127,-70.267014,2026-04-26,08:13 AM,eBird - Traveling Count,48,1,1.15,,1
-S321649804,American Goldfinch,Spinus tristis,32617,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-14,12:06 PM,eBird - Stationary Count,1,1,,,1
-S330425959,Chipping Sparrow,Spizella passerina,32990,1,US-MA,Bristol,L11660244,Destruction Brook Woods (DNRT),41.570637,-71.0175991,2026-05-01,07:42 AM,eBird - Traveling Count,83,1,1.5,,2
-S320924964,Chipping Sparrow,Spizella passerina,32990,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-12,07:05 PM,eBird - Stationary Count,1,1,,,1
-S327157311,Chipping Sparrow,Spizella passerina,32990,2,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-25,11:31 AM,eBird - Stationary Count,14,1,,,1
-S321625938,Dark-eyed Junco,Junco hyemalis,33124,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-14,10:42 AM,eBird - Traveling Count,24,1,.12,,1
-S321644255,Dark-eyed Junco,Junco hyemalis,33124,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-14,11:35 AM,eBird - Traveling Count,19,1,.098,,1
-S322631067,Dark-eyed Junco,Junco hyemalis,33124,2,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-16,04:53 PM,eBird - Stationary Count,2,1,,,1
-S318746783,White-throated Sparrow,Zonotrichia albicollis,33201,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-08,11:08 AM,eBird - Stationary Count,1,1,,,1,,,,654506181
-S331077773,Song Sparrow,Melospiza melodia,33277,1,US-MA,Bristol,L5086328,West Island Beach,41.5851223,-70.8219668,2026-05-02,10:39 AM,eBird - Traveling Count,22,1,.556,,1
-S321644255,Song Sparrow,Melospiza melodia,33277,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-14,11:35 AM,eBird - Traveling Count,19,1,.098,,1
-S326664337,Song Sparrow,Melospiza melodia,33277,2,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-24,03:53 PM,eBird - Stationary Count,9,1,,,1
-S327718904,Song Sparrow,Melospiza melodia,33277,2,US-ME,Cumberland,L2706386,Payson Park,43.68127,-70.267014,2026-04-26,08:13 AM,eBird - Traveling Count,48,1,1.15,,1
-S330425959,Eastern Towhee,Pipilo erythrophthalmus,33415,1,US-MA,Bristol,L11660244,Destruction Brook Woods (DNRT),41.570637,-71.0175991,2026-05-01,07:42 AM,eBird - Traveling Count,83,1,1.5,,2
-S330391580,Red-winged Blackbird,Agelaius phoeniceus,33779,6,US-MA,Bristol,L784803,Allens Pond WS--Beach Loop (Mass Audubon),41.5070668,-71.023618,2026-05-01,09:29 AM,eBird - Traveling Count,57,1,1.867,,1,,,,656272763 656272764
-S331077773,Red-winged Blackbird,Agelaius phoeniceus,33779,1,US-MA,Bristol,L5086328,West Island Beach,41.5851223,-70.8219668,2026-05-02,10:39 AM,eBird - Traveling Count,22,1,.556,,1
-S333184005,Red-winged Blackbird,Agelaius phoeniceus,33779,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-05-05,03:02 PM,eBird - Stationary Count,6,1,,,1
-S327718904,Red-winged Blackbird,Agelaius phoeniceus,33779,1,US-ME,Cumberland,L2706386,Payson Park,43.68127,-70.267014,2026-04-26,08:13 AM,eBird - Traveling Count,48,1,1.15,,1
-S328668916,Red-winged Blackbird,Agelaius phoeniceus,33779,1,US-ME,Cumberland,L2428363,"Willowdale Golf Course Ponds, Scarborough",43.5754165,-70.3485489,2026-04-27,04:44 PM,eBird - Traveling Count,54,1,2.482,,1
-S333105498,Brown-headed Cowbird,Molothrus ater,33833,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-05-05,12:10 PM,eBird - Stationary Count,12,1,,,1
-S333184005,Common Grackle,Quiscalus quiscula,33853,2,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-05-05,03:02 PM,eBird - Stationary Count,6,1,,,1
-S330425959,Ovenbird,Seiurus aurocapilla,33946,1,US-MA,Bristol,L11660244,Destruction Brook Woods (DNRT),41.570637,-71.0175991,2026-05-01,07:42 AM,eBird - Traveling Count,83,1,1.5,,2
-S330425959,Northern Waterthrush,Parkesia noveboracensis,33953,1,US-MA,Bristol,L11660244,Destruction Brook Woods (DNRT),41.570637,-71.0175991,2026-05-01,07:42 AM,eBird - Traveling Count,83,1,1.5,,2
-S322181326,Pine Warbler,Setophaga pinus,34153,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-15,04:40 PM,eBird - Stationary Count,1,1,,,1
-S330391580,Northern Cardinal,Cardinalis cardinalis,34515,1,US-MA,Bristol,L784803,Allens Pond WS--Beach Loop (Mass Audubon),41.5070668,-71.023618,2026-05-01,09:29 AM,eBird - Traveling Count,57,1,1.867,,1
-S330425959,Northern Cardinal,Cardinalis cardinalis,34515,1,US-MA,Bristol,L11660244,Destruction Brook Woods (DNRT),41.570637,-71.0175991,2026-05-01,07:42 AM,eBird - Traveling Count,83,1,1.5,,2
-S319196479,Northern Cardinal,Cardinalis cardinalis,34515,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-09,11:19 AM,eBird - Stationary Count,1,1,,,1
-S320800124,Northern Cardinal,Cardinalis cardinalis,34515,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-12,02:19 PM,eBird - Stationary Count,1,1,,,1
-S321644255,Northern Cardinal,Cardinalis cardinalis,34515,2,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-14,11:35 AM,eBird - Traveling Count,19,1,.098,,1,,,,654986160 654986161
-S324828923,Northern Cardinal,Cardinalis cardinalis,34515,3,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-20,05:50 PM,eBird - Traveling Count,31,1,2.574,,1
-S333105498,Northern Cardinal,Cardinalis cardinalis,34515,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-05-05,12:10 PM,eBird - Stationary Count,12,1,,,1
-S333184005,Northern Cardinal,Cardinalis cardinalis,34515,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-05-05,03:02 PM,eBird - Stationary Count,6,1,,,1
-S326963663,Northern Cardinal,Cardinalis cardinalis,34515,1,US-ME,Cumberland,L1579234,"Robinson Woods Preserve, Cape Elizabeth",43.6106674,-70.2164627,2026-04-25,07:19 AM,eBird - Traveling Count,39,1,1.93,,1
+S335089942,Canada Goose,Branta canadensis,347,2,US-ME,Cumberland,L9076474,Forest City Cemetery,43.6346567,-70.2774657,2026-05-09,06:47 AM,eBird - Traveling Count,17,1,.661,,1
+S328668916,Canada Goose,Branta canadensis,347,3,US-ME,Cumberland,L2428363,"Willowdale Golf Course Ponds, Scarborough",43.5754165,-70.3485489,2026-04-27,04:44 PM,eBird - Traveling Count,54,1,2.482,,1
+S383369974,Gadwall,Mareca strepera,513,3,US-ME,Piscataquis,L16119408,Baxter SP--Russell Pond,45.9959688,-68.9070375,2026-08-12,09:13 AM,eBird - Casual Observation,,0,,,2
+S319507306,Mallard,Anas platyrhynchos,554,7,US-ME,Cumberland,L9076474,Forest City Cemetery,43.6346567,-70.2774657,2026-04-10,06:55 AM,eBird - Traveling Count,34,1,1.101,,1
+S328668916,Mallard,Anas platyrhynchos,554,4,US-ME,Cumberland,L2428363,"Willowdale Golf Course Ponds, Scarborough",43.5754165,-70.3485489,2026-04-27,04:44 PM,eBird - Traveling Count,54,1,2.482,,1
+S327730682,American Black Duck,Anas rubripes,581,2,US-ME,Cumberland,L2706386,Payson Park,43.68127,-70.267014,2026-04-26,09:04 AM,eBird - Traveling Count,8,1,.12,,1
+S412746406,Common Eider,Somateria mollissima,734,2,US-MA,Bristol,L784803,Allens Pond WS--Beach Loop (Mass Audubon),41.5070668,-71.023618,2026-11-23,03:38 PM,eBird - Traveling Count,41,1,.787,,3
+S327718904,Common Eider,Somateria mollissima,734,3,US-ME,Cumberland,L2706386,Payson Park,43.68127,-70.267014,2026-04-26,08:13 AM,eBird - Traveling Count,48,1,1.15,,1
+S412746406,Bufflehead,Bucephala albeola,763,2,US-MA,Bristol,L784803,Allens Pond WS--Beach Loop (Mass Audubon),41.5070668,-71.023618,2026-11-23,03:38 PM,eBird - Traveling Count,41,1,.787,,3
+S412746406,Hooded Merganser,Lophodytes cucullatus,775,9,US-MA,Bristol,L784803,Allens Pond WS--Beach Loop (Mass Audubon),41.5070668,-71.023618,2026-11-23,03:38 PM,eBird - Traveling Count,41,1,.787,,3
+S412746406,Red-breasted Merganser,Mergus serrator,791,1,US-MA,Bristol,L784803,Allens Pond WS--Beach Loop (Mass Audubon),41.5070668,-71.023618,2026-11-23,03:38 PM,eBird - Traveling Count,41,1,.787,,3
+S318223222,Wild Turkey,Meleagris gallopavo,1296,8,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-07,06:48 AM,eBird - Casual Observation,,0,,,1
+S318746783,Wild Turkey,Meleagris gallopavo,1296,7,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-08,11:08 AM,eBird - Stationary Count,1,1,,,1
+S319196479,Wild Turkey,Meleagris gallopavo,1296,7,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-09,11:19 AM,eBird - Stationary Count,1,1,,,1
+S320740429,Wild Turkey,Meleagris gallopavo,1296,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-12,12:26 PM,eBird - Stationary Count,13,1,,,1
+S320924964,Wild Turkey,Meleagris gallopavo,1296,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-12,07:05 PM,eBird - Stationary Count,1,1,,,1
+S322181326,Wild Turkey,Meleagris gallopavo,1296,3,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-15,04:40 PM,eBird - Stationary Count,1,1,,,1
+S333105498,Wild Turkey,Meleagris gallopavo,1296,2,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-05-05,12:10 PM,eBird - Stationary Count,12,1,,,1
+S404568125,Ruffed Grouse,Bonasa umbellus,1305,1,US-ME,Piscataquis,L78877128,Gauntlet Falls,45.541683,-69.037815,2026-10-22,04:18 PM,eBird - Casual Observation,,0,,,1
+S324776271,Mourning Dove,Zenaida macroura,2438,2,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-20,03:22 PM,eBird - Traveling Count,7,1,.092,,1
+S334428156,Mourning Dove,Zenaida macroura,2438,3,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-05-08,06:18 AM,eBird - Traveling Count,50,1,.292,,1
+S327718904,Mourning Dove,Zenaida macroura,2438,1,US-ME,Cumberland,L2706386,Payson Park,43.68127,-70.267014,2026-04-26,08:13 AM,eBird - Traveling Count,48,1,1.15,,1
+S341960821,Mourning Dove,Zenaida macroura,2438,2,US-ME,Cumberland,L4407245,Pleasant Hill Preserve,43.5823554,-70.2911113,2026-05-18,04:39 PM,eBird - Traveling Count,54,1,2.531,,1
+S346992095,Mourning Dove,Zenaida macroura,2438,1,US-ME,Cumberland,L67844524,Sawyer Park,43.621616,-70.30482,2026-05-26,06:26 AM,eBird - Traveling Count,9,1,.457,,1
+S383369959,Ruby-throated Hummingbird,Archilochus colubris,4839,1,US-ME,Piscataquis,L16119408,Baxter SP--Russell Pond,45.9959688,-68.9070375,2026-08-12,06:45 AM,eBird - Stationary Count,14,1,,,3
+S330391580,Saltmarsh Willet,Tringa semipalmata,6188,3,US-MA,Bristol,L784803,Allens Pond WS--Beach Loop (Mass Audubon),41.5070668,-71.023618,2026-05-01,09:29 AM,eBird - Traveling Count,57,1,1.867,,1
+S331077773,Saltmarsh Willet,Tringa semipalmata,6188,2,US-MA,Bristol,L5086328,West Island Beach,41.5851223,-70.8219668,2026-05-02,10:39 AM,eBird - Traveling Count,22,1,.556,,1
+S331077773,Greater Yellowlegs,Tringa melanoleuca,6195,1,US-MA,Bristol,L5086328,West Island Beach,41.5851223,-70.8219668,2026-05-02,10:39 AM,eBird - Traveling Count,22,1,.556,,1
+S327718904,American Herring Gull,Larus smithsonianus,6582,4,US-ME,Cumberland,L2706386,Payson Park,43.68127,-70.267014,2026-04-26,08:13 AM,eBird - Traveling Count,48,1,1.15,,1
+S330391580,Great Black-backed Gull,Larus marinus,6608,2,US-MA,Bristol,L784803,Allens Pond WS--Beach Loop (Mass Audubon),41.5070668,-71.023618,2026-05-01,09:29 AM,eBird - Traveling Count,57,1,1.867,,1
+S331077773,Common Tern,Sterna hirundo,6798,2,US-MA,Bristol,L5086328,West Island Beach,41.5851223,-70.8219668,2026-05-02,10:39 AM,eBird - Traveling Count,22,1,.556,,1
+S383369979,Common Loon,Gavia immer,6987,3,US-ME,Piscataquis,L16119408,Baxter SP--Russell Pond,45.9959688,-68.9070375,2026-08-12,06:33 PM,eBird - Traveling Count,57,1,.065,,3
+S330391580,Double-crested Cormorant,Nannopterum auritum,7480,2,US-MA,Bristol,L784803,Allens Pond WS--Beach Loop (Mass Audubon),41.5070668,-71.023618,2026-05-01,09:29 AM,eBird - Traveling Count,57,1,1.867,,1,,,,656273451
+S412746406,Great Egret,Ardea alba,7787,1,US-MA,Bristol,L784803,Allens Pond WS--Beach Loop (Mass Audubon),41.5070668,-71.023618,2026-11-23,03:38 PM,eBird - Traveling Count,41,1,.787,,3,,"Flew right by us, yellow bill black legs easily visible"
+S383369959,Great Blue Heron,Ardea herodias,7811,1,US-ME,Piscataquis,L16119408,Baxter SP--Russell Pond,45.9959688,-68.9070375,2026-08-12,06:45 AM,eBird - Stationary Count,14,1,,,3
+S330425959,Black Vulture,Coragyps atratus,7869,1,US-MA,Bristol,L11660244,Destruction Brook Woods (DNRT),41.570637,-71.0175991,2026-05-01,07:42 AM,eBird - Traveling Count,83,1,1.5,,2
+S330391580,Osprey,Pandion haliaetus,7890,1,US-MA,Bristol,L784803,Allens Pond WS--Beach Loop (Mass Audubon),41.5070668,-71.023618,2026-05-01,09:29 AM,eBird - Traveling Count,57,1,1.867,,1
+S341960821,Osprey,Pandion haliaetus,7890,1,US-ME,Cumberland,L4407245,Pleasant Hill Preserve,43.5823554,-70.2911113,2026-05-18,04:39 PM,eBird - Traveling Count,54,1,2.531,,1
+S383369963,American Goshawk,Astur atricapillus,8351,1,US-ME,Piscataquis,L16119408,Baxter SP--Russell Pond,45.9959688,-68.9070375,2026-08-13,08:05 AM,eBird - Casual Observation,,0,,,3
+S404568125,Bald Eagle,Haliaeetus leucocephalus,8429,1,US-ME,Piscataquis,L78877128,Gauntlet Falls,45.541683,-69.037815,2026-10-22,04:18 PM,eBird - Casual Observation,,0,,,1
+S333105498,Red-tailed Hawk,Buteo jamaicensis,8569,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-05-05,12:10 PM,eBird - Stationary Count,12,1,,,1
+S383369979,Belted Kingfisher,Megaceryle alcyon,10378,1,US-ME,Piscataquis,L16119408,Baxter SP--Russell Pond,45.9959688,-68.9070375,2026-08-12,06:33 PM,eBird - Traveling Count,57,1,.065,,3
+S327157311,Red-bellied Woodpecker,Melanerpes carolinus,11270,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-25,11:31 AM,eBird - Stationary Count,14,1,,,1
+S321074228,Downy Woodpecker,Dryobates pubescens,11477,2,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-13,07:35 AM,eBird - Stationary Count,1,1,,,1
+S322631067,Downy Woodpecker,Dryobates pubescens,11477,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-16,04:53 PM,eBird - Stationary Count,2,1,,,1
+S326664337,Downy Woodpecker,Dryobates pubescens,11477,2,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-24,03:53 PM,eBird - Stationary Count,9,1,,,1
+S333105498,Downy Woodpecker,Dryobates pubescens,11477,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-05-05,12:10 PM,eBird - Stationary Count,12,1,,,1
+S326963663,Downy Woodpecker,Dryobates pubescens,11477,1,US-ME,Cumberland,L1579234,"Robinson Woods Preserve, Cape Elizabeth",43.6106674,-70.2164627,2026-04-25,07:19 AM,eBird - Traveling Count,39,1,1.93,,1
+S333184005,Hairy Woodpecker,Leuconotopicus villosus,11504,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-05-05,03:02 PM,eBird - Stationary Count,6,1,,,1,,,,656654483
+S320924964,Eastern Phoebe,Sayornis phoebe,17101,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-12,07:05 PM,eBird - Stationary Count,1,1,,,1
+S330425959,Blue Jay,Cyanocitta cristata,21395,4,US-MA,Bristol,L11660244,Destruction Brook Woods (DNRT),41.570637,-71.0175991,2026-05-01,07:42 AM,eBird - Traveling Count,83,1,1.5,,2
+S335089942,Blue Jay,Cyanocitta cristata,21395,1,US-ME,Cumberland,L9076474,Forest City Cemetery,43.6346567,-70.2774657,2026-05-09,06:47 AM,eBird - Traveling Count,17,1,.661,,1
+S333105498,Blue Jay,Cyanocitta cristata,21395,2,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-05-05,12:10 PM,eBird - Stationary Count,12,1,,,1,,,,656654431
+S333184005,Blue Jay,Cyanocitta cristata,21395,3,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-05-05,03:02 PM,eBird - Stationary Count,6,1,,,1
+S334428156,Blue Jay,Cyanocitta cristata,21395,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-05-08,06:18 AM,eBird - Traveling Count,50,1,.292,,1
+S341960821,Blue Jay,Cyanocitta cristata,21395,1,US-ME,Cumberland,L4407245,Pleasant Hill Preserve,43.5823554,-70.2911113,2026-05-18,04:39 PM,eBird - Traveling Count,54,1,2.531,,1
+S404448941,Blue Jay,Cyanocitta cristata,21395,2,US-ME,Piscataquis,L78877128,Gauntlet Falls,45.541683,-69.037815,2026-10-22,08:30 AM,eBird - Casual Observation,,0,,,1
+S319507306,American Crow,Corvus brachyrhynchos,21656,2,US-ME,Cumberland,L9076474,Forest City Cemetery,43.6346567,-70.2774657,2026-04-10,06:55 AM,eBird - Traveling Count,34,1,1.101,,1
+S335089942,American Crow,Corvus brachyrhynchos,21656,1,US-ME,Cumberland,L9076474,Forest City Cemetery,43.6346567,-70.2774657,2026-05-09,06:47 AM,eBird - Traveling Count,17,1,.661,,1
+S318223222,American Crow,Corvus brachyrhynchos,21656,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-07,06:48 AM,eBird - Casual Observation,,0,,,1
+S319233187,American Crow,Corvus brachyrhynchos,21656,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-09,12:41 PM,eBird - Stationary Count,1,1,,,1
+S333105498,American Crow,Corvus brachyrhynchos,21656,2,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-05-05,12:10 PM,eBird - Stationary Count,12,1,,,1
+S326963663,American Crow,Corvus brachyrhynchos,21656,1,US-ME,Cumberland,L1579234,"Robinson Woods Preserve, Cape Elizabeth",43.6106674,-70.2164627,2026-04-25,07:19 AM,eBird - Traveling Count,39,1,1.93,,1
+S404448941,Common Raven,Corvus corax,21721,1,US-ME,Piscataquis,L78877128,Gauntlet Falls,45.541683,-69.037815,2026-10-22,08:30 AM,eBird - Casual Observation,,0,,,1
+S330425959,Black-capped Chickadee,Poecile atricapillus,22164,1,US-MA,Bristol,L11660244,Destruction Brook Woods (DNRT),41.570637,-71.0175991,2026-05-01,07:42 AM,eBird - Traveling Count,83,1,1.5,,2
+S319233187,Black-capped Chickadee,Poecile atricapillus,22164,2,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-09,12:41 PM,eBird - Stationary Count,1,1,,,1
+S320800124,Black-capped Chickadee,Poecile atricapillus,22164,2,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-12,02:19 PM,eBird - Stationary Count,1,1,,,1
+S321074228,Black-capped Chickadee,Poecile atricapillus,22164,5,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-13,07:35 AM,eBird - Stationary Count,1,1,,,1
+S321625938,Black-capped Chickadee,Poecile atricapillus,22164,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-14,10:42 AM,eBird - Traveling Count,24,1,.12,,1
+S321644255,Black-capped Chickadee,Poecile atricapillus,22164,3,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-14,11:35 AM,eBird - Traveling Count,19,1,.098,,1
+S322181326,Black-capped Chickadee,Poecile atricapillus,22164,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-15,04:40 PM,eBird - Stationary Count,1,1,,,1
+S322631067,Black-capped Chickadee,Poecile atricapillus,22164,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-16,04:53 PM,eBird - Stationary Count,2,1,,,1
+S324776271,Black-capped Chickadee,Poecile atricapillus,22164,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-20,03:22 PM,eBird - Traveling Count,7,1,.092,,1
+S333105498,Black-capped Chickadee,Poecile atricapillus,22164,3,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-05-05,12:10 PM,eBird - Stationary Count,12,1,,,1
+S333184005,Black-capped Chickadee,Poecile atricapillus,22164,2,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-05-05,03:02 PM,eBird - Stationary Count,6,1,,,1
+S334428156,Black-capped Chickadee,Poecile atricapillus,22164,3,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-05-08,06:18 AM,eBird - Traveling Count,50,1,.292,,1
+S341960821,Black-capped Chickadee,Poecile atricapillus,22164,2,US-ME,Cumberland,L4407245,Pleasant Hill Preserve,43.5823554,-70.2911113,2026-05-18,04:39 PM,eBird - Traveling Count,54,1,2.531,,1
+S326963663,Black-capped Chickadee,Poecile atricapillus,22164,1,US-ME,Cumberland,L1579234,"Robinson Woods Preserve, Cape Elizabeth",43.6106674,-70.2164627,2026-04-25,07:19 AM,eBird - Traveling Count,39,1,1.93,,1
+S330425959,Tufted Titmouse,Baeolophus bicolor,22261,1,US-MA,Bristol,L11660244,Destruction Brook Woods (DNRT),41.570637,-71.0175991,2026-05-01,07:42 AM,eBird - Traveling Count,83,1,1.5,,2
+S320740429,Tufted Titmouse,Baeolophus bicolor,22261,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-12,12:26 PM,eBird - Stationary Count,13,1,,,1
+S321644255,Tufted Titmouse,Baeolophus bicolor,22261,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-14,11:35 AM,eBird - Traveling Count,19,1,.098,,1
+S326664337,Tufted Titmouse,Baeolophus bicolor,22261,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-24,03:53 PM,eBird - Stationary Count,9,1,,,1
+S333105498,Tufted Titmouse,Baeolophus bicolor,22261,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-05-05,12:10 PM,eBird - Stationary Count,12,1,,,1
+S330391580,Tree Swallow,Tachycineta bicolor,24169,1,US-MA,Bristol,L784803,Allens Pond WS--Beach Loop (Mass Audubon),41.5070668,-71.023618,2026-05-01,09:29 AM,eBird - Traveling Count,57,1,1.867,,1
+S341960821,Tree Swallow,Tachycineta bicolor,24169,2,US-ME,Cumberland,L4407245,Pleasant Hill Preserve,43.5823554,-70.2911113,2026-05-18,04:39 PM,eBird - Traveling Count,54,1,2.531,,1
+S330425959,White-breasted Nuthatch,Sitta carolinensis,27033,1,US-MA,Bristol,L11660244,Destruction Brook Woods (DNRT),41.570637,-71.0175991,2026-05-01,07:42 AM,eBird - Traveling Count,83,1,1.5,,2
+S334428156,Northern House Wren,Troglodytes aedon,27347,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-05-08,06:18 AM,eBird - Traveling Count,50,1,.292,,1
+S346992095,European Starling,Sturnus vulgaris,27986,3,US-ME,Cumberland,L67844524,Sawyer Park,43.621616,-70.30482,2026-05-26,06:26 AM,eBird - Traveling Count,9,1,.457,,1
+S335089942,Gray Catbird,Dumetella carolinensis,28176,3,US-ME,Cumberland,L9076474,Forest City Cemetery,43.6346567,-70.2774657,2026-05-09,06:47 AM,eBird - Traveling Count,17,1,.661,,1
+S333105498,Gray Catbird,Dumetella carolinensis,28176,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-05-05,12:10 PM,eBird - Stationary Count,12,1,,,1,,,,656654414
+S334428156,Gray Catbird,Dumetella carolinensis,28176,2,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-05-08,06:18 AM,eBird - Traveling Count,50,1,.292,,1
+S336196571,Gray Catbird,Dumetella carolinensis,28176,3,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-05-10,08:02 AM,eBird - Stationary Count,3,1,,,1
+S341960821,Gray Catbird,Dumetella carolinensis,28176,3,US-ME,Cumberland,L4407245,Pleasant Hill Preserve,43.5823554,-70.2911113,2026-05-18,04:39 PM,eBird - Traveling Count,54,1,2.531,,1
+S334428156,Northern Mockingbird,Mimus polyglottos,28293,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-05-08,06:18 AM,eBird - Traveling Count,50,1,.292,,1
+S330391580,American Robin,Turdus migratorius,28813,2,US-MA,Bristol,L784803,Allens Pond WS--Beach Loop (Mass Audubon),41.5070668,-71.023618,2026-05-01,09:29 AM,eBird - Traveling Count,57,1,1.867,,1
+S319507306,American Robin,Turdus migratorius,28813,1,US-ME,Cumberland,L9076474,Forest City Cemetery,43.6346567,-70.2774657,2026-04-10,06:55 AM,eBird - Traveling Count,34,1,1.101,,1
+S320740429,American Robin,Turdus migratorius,28813,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-12,12:26 PM,eBird - Stationary Count,13,1,,,1
+S320800124,American Robin,Turdus migratorius,28813,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-12,02:19 PM,eBird - Stationary Count,1,1,,,1
+S320924964,American Robin,Turdus migratorius,28813,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-12,07:05 PM,eBird - Stationary Count,1,1,,,1
+S321074228,American Robin,Turdus migratorius,28813,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-13,07:35 AM,eBird - Stationary Count,1,1,,,1
+S321644255,American Robin,Turdus migratorius,28813,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-14,11:35 AM,eBird - Traveling Count,19,1,.098,,1,,,,654986112
+S324828923,American Robin,Turdus migratorius,28813,2,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-20,05:50 PM,eBird - Traveling Count,31,1,2.574,,1
+S333184005,American Robin,Turdus migratorius,28813,2,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-05-05,03:02 PM,eBird - Stationary Count,6,1,,,1
+S341960821,American Robin,Turdus migratorius,28813,1,US-ME,Cumberland,L4407245,Pleasant Hill Preserve,43.5823554,-70.2911113,2026-05-18,04:39 PM,eBird - Traveling Count,54,1,2.531,,1
+S346992095,American Robin,Turdus migratorius,28813,3,US-ME,Cumberland,L67844524,Sawyer Park,43.621616,-70.30482,2026-05-26,06:26 AM,eBird - Traveling Count,9,1,.457,,1
+S343518157,American Robin,Turdus migratorius,28813,1,US-ME,Cumberland,L67115024,Spurwink,43.59896,-70.242231,2026-05-21,02:53 PM,eBird - Traveling Count,7,1,.414,,1
+S328668916,American Robin,Turdus migratorius,28813,1,US-ME,Cumberland,L2428363,"Willowdale Golf Course Ponds, Scarborough",43.5754165,-70.3485489,2026-04-27,04:44 PM,eBird - Traveling Count,54,1,2.482,,1
+S343518157,Cedar Waxwing,Bombycilla cedrorum,30109,4,US-ME,Cumberland,L67115024,Spurwink,43.59896,-70.242231,2026-05-21,02:53 PM,eBird - Traveling Count,7,1,.414,,1
+S330391580,House Sparrow,Passer domesticus,31772,1,US-MA,Bristol,L784803,Allens Pond WS--Beach Loop (Mass Audubon),41.5070668,-71.023618,2026-05-01,09:29 AM,eBird - Traveling Count,57,1,1.867,,1
+S321649804,House Finch,Haemorhous mexicanus,32556,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-14,12:06 PM,eBird - Stationary Count,1,1,,,1,,,,654985970
+S327718904,House Finch,Haemorhous mexicanus,32556,2,US-ME,Cumberland,L2706386,Payson Park,43.68127,-70.267014,2026-04-26,08:13 AM,eBird - Traveling Count,48,1,1.15,,1
+S383369959,White-winged Crossbill,Loxia leucoptera,32791,3,US-ME,Piscataquis,L16119408,Baxter SP--Russell Pond,45.9959688,-68.9070375,2026-08-12,06:45 AM,eBird - Stationary Count,14,1,,,3
+S321649804,American Goldfinch,Spinus tristis,32871,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-14,12:06 PM,eBird - Stationary Count,1,1,,,1
+S330425959,Chipping Sparrow,Spizella passerina,33243,1,US-MA,Bristol,L11660244,Destruction Brook Woods (DNRT),41.570637,-71.0175991,2026-05-01,07:42 AM,eBird - Traveling Count,83,1,1.5,,2
+S320924964,Chipping Sparrow,Spizella passerina,33243,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-12,07:05 PM,eBird - Stationary Count,1,1,,,1
+S327157311,Chipping Sparrow,Spizella passerina,33243,2,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-25,11:31 AM,eBird - Stationary Count,14,1,,,1
+S321625938,Dark-eyed Junco,Junco hyemalis,33379,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-14,10:42 AM,eBird - Traveling Count,24,1,.12,,1
+S321644255,Dark-eyed Junco,Junco hyemalis,33379,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-14,11:35 AM,eBird - Traveling Count,19,1,.098,,1
+S322631067,Dark-eyed Junco,Junco hyemalis,33379,2,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-16,04:53 PM,eBird - Stationary Count,2,1,,,1
+S318746783,White-throated Sparrow,Zonotrichia albicollis,33455,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-08,11:08 AM,eBird - Stationary Count,1,1,,,1,,,,654506181
+S331077773,Song Sparrow,Melospiza melodia,33527,1,US-MA,Bristol,L5086328,West Island Beach,41.5851223,-70.8219668,2026-05-02,10:39 AM,eBird - Traveling Count,22,1,.556,,1
+S321644255,Song Sparrow,Melospiza melodia,33527,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-14,11:35 AM,eBird - Traveling Count,19,1,.098,,1
+S326664337,Song Sparrow,Melospiza melodia,33527,2,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-24,03:53 PM,eBird - Stationary Count,9,1,,,1
+S327718904,Song Sparrow,Melospiza melodia,33527,2,US-ME,Cumberland,L2706386,Payson Park,43.68127,-70.267014,2026-04-26,08:13 AM,eBird - Traveling Count,48,1,1.15,,1
+S341960821,Song Sparrow,Melospiza melodia,33527,1,US-ME,Cumberland,L4407245,Pleasant Hill Preserve,43.5823554,-70.2911113,2026-05-18,04:39 PM,eBird - Traveling Count,54,1,2.531,,1
+S346992095,Song Sparrow,Melospiza melodia,33527,4,US-ME,Cumberland,L67844524,Sawyer Park,43.621616,-70.30482,2026-05-26,06:26 AM,eBird - Traveling Count,9,1,.457,,1
+S330425959,Eastern Towhee,Pipilo erythrophthalmus,33661,1,US-MA,Bristol,L11660244,Destruction Brook Woods (DNRT),41.570637,-71.0175991,2026-05-01,07:42 AM,eBird - Traveling Count,83,1,1.5,,2
+S330391580,Red-winged Blackbird,Agelaius phoeniceus,34020,6,US-MA,Bristol,L784803,Allens Pond WS--Beach Loop (Mass Audubon),41.5070668,-71.023618,2026-05-01,09:29 AM,eBird - Traveling Count,57,1,1.867,,1,,,,656272763 656272764
+S331077773,Red-winged Blackbird,Agelaius phoeniceus,34020,1,US-MA,Bristol,L5086328,West Island Beach,41.5851223,-70.8219668,2026-05-02,10:39 AM,eBird - Traveling Count,22,1,.556,,1
+S333184005,Red-winged Blackbird,Agelaius phoeniceus,34020,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-05-05,03:02 PM,eBird - Stationary Count,6,1,,,1
+S327718904,Red-winged Blackbird,Agelaius phoeniceus,34020,1,US-ME,Cumberland,L2706386,Payson Park,43.68127,-70.267014,2026-04-26,08:13 AM,eBird - Traveling Count,48,1,1.15,,1
+S341960821,Red-winged Blackbird,Agelaius phoeniceus,34020,3,US-ME,Cumberland,L4407245,Pleasant Hill Preserve,43.5823554,-70.2911113,2026-05-18,04:39 PM,eBird - Traveling Count,54,1,2.531,,1
+S343518157,Red-winged Blackbird,Agelaius phoeniceus,34020,3,US-ME,Cumberland,L67115024,Spurwink,43.59896,-70.242231,2026-05-21,02:53 PM,eBird - Traveling Count,7,1,.414,,1
+S328668916,Red-winged Blackbird,Agelaius phoeniceus,34020,1,US-ME,Cumberland,L2428363,"Willowdale Golf Course Ponds, Scarborough",43.5754165,-70.3485489,2026-04-27,04:44 PM,eBird - Traveling Count,54,1,2.482,,1
+S333105498,Brown-headed Cowbird,Molothrus ater,34072,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-05-05,12:10 PM,eBird - Stationary Count,12,1,,,1
+S333184005,Common Grackle,Quiscalus quiscula,34091,2,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-05-05,03:02 PM,eBird - Stationary Count,6,1,,,1
+S330425959,Ovenbird,Seiurus aurocapilla,34185,1,US-MA,Bristol,L11660244,Destruction Brook Woods (DNRT),41.570637,-71.0175991,2026-05-01,07:42 AM,eBird - Traveling Count,83,1,1.5,,2
+S334428156,Ovenbird,Seiurus aurocapilla,34185,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-05-08,06:18 AM,eBird - Traveling Count,50,1,.292,,1
+S330425959,Northern Waterthrush,Parkesia noveboracensis,34192,1,US-MA,Bristol,L11660244,Destruction Brook Woods (DNRT),41.570637,-71.0175991,2026-05-01,07:42 AM,eBird - Traveling Count,83,1,1.5,,2
+S336196571,Black-and-white Warbler,Mniotilta varia,34201,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-05-10,08:02 AM,eBird - Stationary Count,3,1,,,1
+S383369967,Black-and-white Warbler,Mniotilta varia,34201,2,US-ME,Piscataquis,L16119408,Baxter SP--Russell Pond,45.9959688,-68.9070375,2026-08-12,12:26 PM,eBird - Casual Observation,,0,,,3
+S334428156,Northern Yellow Warbler,Setophaga aestiva,34328,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-05-08,06:18 AM,eBird - Traveling Count,50,1,.292,,1
+S322181326,Pine Warbler,Setophaga pinus,34394,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-15,04:40 PM,eBird - Stationary Count,1,1,,,1
+S383369959,Pine Warbler,Setophaga pinus,34394,1,US-ME,Piscataquis,L16119408,Baxter SP--Russell Pond,45.9959688,-68.9070375,2026-08-12,06:45 AM,eBird - Stationary Count,14,1,,,3
+S330391580,Northern Cardinal,Cardinalis cardinalis,34768,1,US-MA,Bristol,L784803,Allens Pond WS--Beach Loop (Mass Audubon),41.5070668,-71.023618,2026-05-01,09:29 AM,eBird - Traveling Count,57,1,1.867,,1
+S330425959,Northern Cardinal,Cardinalis cardinalis,34768,1,US-MA,Bristol,L11660244,Destruction Brook Woods (DNRT),41.570637,-71.0175991,2026-05-01,07:42 AM,eBird - Traveling Count,83,1,1.5,,2
+S335089942,Northern Cardinal,Cardinalis cardinalis,34768,1,US-ME,Cumberland,L9076474,Forest City Cemetery,43.6346567,-70.2774657,2026-05-09,06:47 AM,eBird - Traveling Count,17,1,.661,,1
+S319196479,Northern Cardinal,Cardinalis cardinalis,34768,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-09,11:19 AM,eBird - Stationary Count,1,1,,,1
+S320800124,Northern Cardinal,Cardinalis cardinalis,34768,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-12,02:19 PM,eBird - Stationary Count,1,1,,,1
+S321644255,Northern Cardinal,Cardinalis cardinalis,34768,2,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-14,11:35 AM,eBird - Traveling Count,19,1,.098,,1,,,,654986160 654986161
+S324828923,Northern Cardinal,Cardinalis cardinalis,34768,3,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-04-20,05:50 PM,eBird - Traveling Count,31,1,2.574,,1
+S333105498,Northern Cardinal,Cardinalis cardinalis,34768,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-05-05,12:10 PM,eBird - Stationary Count,12,1,,,1
+S333184005,Northern Cardinal,Cardinalis cardinalis,34768,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-05-05,03:02 PM,eBird - Stationary Count,6,1,,,1
+S334428156,Northern Cardinal,Cardinalis cardinalis,34768,2,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-05-08,06:18 AM,eBird - Traveling Count,50,1,.292,,1
+S341960821,Northern Cardinal,Cardinalis cardinalis,34768,1,US-ME,Cumberland,L4407245,Pleasant Hill Preserve,43.5823554,-70.2911113,2026-05-18,04:39 PM,eBird - Traveling Count,54,1,2.531,,1
+S326963663,Northern Cardinal,Cardinalis cardinalis,34768,1,US-ME,Cumberland,L1579234,"Robinson Woods Preserve, Cape Elizabeth",43.6106674,-70.2164627,2026-04-25,07:19 AM,eBird - Traveling Count,39,1,1.93,,1
+S346992095,Northern Cardinal,Cardinalis cardinalis,34768,1,US-ME,Cumberland,L67844524,Sawyer Park,43.621616,-70.30482,2026-05-26,06:26 AM,eBird - Traveling Count,9,1,.457,,1
+S343518157,Northern Cardinal,Cardinalis cardinalis,34768,2,US-ME,Cumberland,L67115024,Spurwink,43.59896,-70.242231,2026-05-21,02:53 PM,eBird - Traveling Count,7,1,.414,,1
+S336196571,Rose-breasted Grosbeak,Pheucticus ludovicianus,34812,1,US-ME,Cumberland,L62114734,Home,43.618038,-70.303394,2026-05-10,08:02 AM,eBird - Stationary Count,3,1,,,1
